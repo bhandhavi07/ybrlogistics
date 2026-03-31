@@ -27,3 +27,4 @@ The `POST /api/contact` endpoint sends the submitted message via SMTP using:
 
 If you do not have real SMTP credentials yet, set `SMTP_USE_JSON_TRANSPORT=true`. The backend will accept the submission and run through the Nodemailer send flow without needing a real mail server.
 
+ 
