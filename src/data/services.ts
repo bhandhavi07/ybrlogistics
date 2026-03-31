@@ -54,10 +54,10 @@ export const servicesCatalog: ServiceItem[] = [
   },
   {
     title: "Moving & Relocation",
-    body: "Planned moves with secure load, transport, and unload execution.",
-    bestFor: "Office relocation and business equipment moves",
+    body: "Residential and commercial moving with secure load, transport, and unload execution.",
+    bestFor: "Home moves, office relocation, and business equipment transfers",
     image: siteImages.services.moving,
-    imageAlt: "White truck on the road for household or office relocation",
+    imageAlt: "White truck on the road for residential and commercial relocation",
     icon: "moving",
   },
   {

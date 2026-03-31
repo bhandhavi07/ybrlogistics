@@ -42,10 +42,10 @@ export default function HomePageClient() {
       href: "/services",
     },
     {
-      title: "Respond when it is urgent",
-      body: "Same-day and dedicated-route options when timelines are tight.",
+      title: "Moving & relocation support",
+      body: "Residential and commercial relocation with clear scheduling and careful handling.",
       image: siteImages.homeFocus.urgent,
-      imageAlt: "Commercial freight trailers for urgent and dedicated runs",
+      imageAlt: "Commercial freight trailers for moving and relocation support",
       href: "/services",
     },
   ];
@@ -53,7 +53,7 @@ export default function HomePageClient() {
   const whyBullets: { text: string; icon: "route" | "clock" | "package" | "chat" }[] = [
     { text: "On-time deliveries with dedicated route planning", icon: "route" },
     { text: "Same-day availability for urgent lane coverage", icon: "clock" },
-    { text: "Handling discipline for palletized and high-care freight", icon: "package" },
+    { text: "Handling discipline for freight, moving, and relocation jobs", icon: "package" },
     { text: "Fast response from one dispatch contact", icon: "chat" },
   ];
 
