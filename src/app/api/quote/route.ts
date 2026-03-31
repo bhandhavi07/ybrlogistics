@@ -34,6 +34,7 @@ type MailError = Error & {
 function getSendFailureMessage(error: MailError) {
   const code = (error.code || "").toUpperCase();
   const responseCode = error.responseCode;
+  const rawMessage = (error.message || "").toLowerCase();
 
   if (code === "EAUTH" || responseCode === 535) {
     return "SMTP authentication failed. Check SMTP_USER/SMTP_PASS. For Microsoft 365, ensure mailbox password is correct and SMTP AUTH is enabled.";
@@ -47,7 +48,15 @@ function getSendFailureMessage(error: MailError) {
     return "Could not connect to the email server. Please verify SMTP_HOST/SMTP_PORT and network access.";
   }
 
-  return "Failed to send email. Please try again later.";
+  if (code === "ETIMEDOUT" || rawMessage.includes("timed out")) {
+    return "Email server timed out. This usually means outbound SMTP is blocked in your hosting environment.";
+  }
+
+  if (code === "ECONNREFUSED" || rawMessage.includes("connection refused")) {
+    return "SMTP connection was refused by the server. Please verify SMTP settings and mailbox SMTP access.";
+  }
+
+  return `Failed to send email. Please try again later. (${code || "UNKNOWN"})`;
 }
 
 function getClientIp(req: Request) {

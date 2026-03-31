@@ -162,7 +162,13 @@ export default function QuoteForm() {
         <label style={{ fontWeight: 800 }}>Preferred Date</label>
         <input
           value={preferredDate}
-          onChange={(e) => setPreferredDate(e.target.value)}
+          onChange={(e) => {
+            setPreferredDate(e.target.value);
+            const el = e.currentTarget;
+            setTimeout(() => {
+              el.blur();
+            }, 0);
+          }}
           required
           type="date"
           style={inputStyle}
