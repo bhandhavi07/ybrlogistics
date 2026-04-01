@@ -83,7 +83,7 @@ export default function HomePageClient() {
           <div className="heroBleedInner">
             <div className="reveal heroBleedKicker">YbrLogistics</div>
             <h1 className="reveal revealDelay1 heroBleedTitle">
-              Freight & last-mile delivery across the Bay Area — fast, reliable, and on time
+              Freight & last-mile delivery Interstate — fast, reliable, and on time
             </h1>
             <p className="reveal revealDelay2 heroBleedLead">
               Bay Area and California coverage with on-time deliveries and fast dispatch response.
