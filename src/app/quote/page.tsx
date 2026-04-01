@@ -7,7 +7,7 @@ export default function QuotePage() {
         <div style={{ marginBottom: 22 }}>
           <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>Request a Shipping Quote</h1>
           <p style={{ margin: "12px 0 0", color: "var(--muted)", lineHeight: 1.7, fontSize: 16 }}>
-            Share your shipment details for Bay Area / California coverage and we&apos;ll send your quote quickly.
+            Share your shipment details for state and interstate coverage and we&apos;ll send your quote quickly.
           </p>
           <p style={{ margin: "12px 0 0", color: "var(--muted)", fontWeight: 700, fontSize: 14 }}>
             Takes less than 1 minute to fill
@@ -24,7 +24,7 @@ export default function QuotePage() {
               <li>Fast response within 24 hours</li>
               <li>Dedicated routes available</li>
               <li>Same-day delivery options</li>
-              <li>Serving Bay Area & California</li>
+              <li>Serving state and interstate routes</li>
             </ul>
             <p style={{ margin: "12px 0 0", color: "var(--muted)", lineHeight: 1.7, fontSize: 15 }}>
               Share your shipment details and we&apos;ll send the next steps clearly.

@@ -83,17 +83,17 @@ export default function HomePageClient() {
           <div className="heroBleedInner">
             <div className="reveal heroBleedKicker">YbrLogistics</div>
             <h1 className="reveal revealDelay1 heroBleedTitle">
-              Freight & last-mile delivery Interstate — fast, reliable, and on time
+              Freight & last-mile delivery across state and interstate routes — fast, reliable, and on time
             </h1>
             <p className="reveal revealDelay2 heroBleedLead">
-              Bay Area and California coverage with on-time deliveries and fast dispatch response.
+              State and interstate coverage with on-time deliveries and fast dispatch response.
             </p>
             <div className="reveal revealDelay2 heroBleedActions">
               <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
                 Get a Quote
               </Link>
             </div>
-            <p className="heroBleedTrust">Serving Bay Area / California</p>
+            <p className="heroBleedTrust">Serving state and interstate routes</p>
           </div>
         </div>
       </section>

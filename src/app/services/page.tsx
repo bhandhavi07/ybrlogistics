@@ -10,7 +10,7 @@ export default function ServicesPage() {
         <header className="servicesPageHead">
           <h1 className="servicesPageTitle">End-to-End Logistics Services</h1>
           <p className="servicesPageSubtitle">
-            Serving Bay Area and California routes with on-time deliveries, dedicated routes, same-day availability, and
+            Serving state and interstate routes with on-time deliveries, dedicated routes, same-day availability, and
             moving & relocation support.
           </p>
         </header>

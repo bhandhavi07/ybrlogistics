@@ -6,7 +6,7 @@ export default function AboutPage() {
   const trustStats = [
     { label: "Years supporting freight operations", value: "8+" },
     { label: "Deliveries coordinated", value: "5,000+" },
-    { label: "Primary coverage", value: "Bay Area / California" },
+    { label: "Primary coverage", value: "State and Interstate" },
   ];
 
   const whoWeServe = [
@@ -116,7 +116,7 @@ export default function AboutPage() {
           <div className="card cardLift" style={{ padding: 18 }}>
             <div style={{ fontWeight: 900, lineHeight: 1.25 }}>Where we operate</div>
             <div style={{ color: "var(--muted)", marginTop: 10, fontWeight: 600, lineHeight: 1.6 }}>
-              We serve Bay Area and California routes, with extended support for regional and long-haul schedules when
+              We serve state and interstate routes, with extended support for regional and long-haul schedules when
               your lanes require it.
             </div>
           </div>

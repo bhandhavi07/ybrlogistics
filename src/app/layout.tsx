@@ -6,8 +6,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "YbrLogistics - Bay Area Freight & Last-Mile Delivery",
-  description: "On-time deliveries, same-day options, and dedicated freight routes across California.",
+  title: "YbrLogistics - State & Interstate Freight & Last-Mile Delivery",
+  description: "On-time deliveries, same-day options, and dedicated freight services across state and interstate routes.",
   icons: {
     icon: "/logo.png",
   },

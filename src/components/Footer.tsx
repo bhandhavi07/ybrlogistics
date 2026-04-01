@@ -25,8 +25,7 @@ export default function Footer() {
               />
             </Link>
             <p className="siteFooterTagline">
-              On-time deliveries, same-day availability, moving & relocation, and dedicated routes across Bay Area /
-              California.
+              On-time deliveries, same-day availability, moving & relocation, and dedicated state and interstate routes.
             </p>
             <div className="siteFooterSocial" aria-label="Social">
               <a

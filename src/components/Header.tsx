@@ -100,7 +100,7 @@ export default function Header() {
         </nav>
       </div>
       <div className="siteServiceAreaBar" role="note" aria-label="Service area">
-        Serving Bay Area / California
+        Serving state and interstate routes
       </div>
     </header>
   );

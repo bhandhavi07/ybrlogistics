@@ -15,7 +15,7 @@ export const servicesCatalog: ServiceItem[] = [
   {
     title: "Local & Regional Freight Transportation",
     body: "On-time lane coverage for local and regional freight moves.",
-    bestFor: "Retail replenishment and multi-stop Bay Area routes",
+    bestFor: "Retail replenishment and multi-stop state and interstate routes",
     image: siteImages.services.localFreight,
     imageAlt: "Commercial truck on a curved road for regional freight runs",
     icon: "truck",
