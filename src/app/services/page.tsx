@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ServiceIcon } from "../../components/service/ServiceIcons";
 import { servicesCatalog } from "../../data/services";
+
+export const metadata: Metadata = {
+  title: "Logistics Services",
+  description: "Explore freight transportation, last-mile, dedicated routes, and moving support from YbrLogistics.",
+  alternates: {
+    canonical: "/services",
+  },
+};
 
 export default function ServicesPage() {
   return (

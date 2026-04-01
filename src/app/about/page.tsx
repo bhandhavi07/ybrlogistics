@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { siteImages } from "../../data/siteImages";
+
+export const metadata: Metadata = {
+  title: "About YbrLogistics",
+  description: "Learn how YbrLogistics supports businesses with on-time freight planning across state and interstate routes.",
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 export default function AboutPage() {
   const trustStats = [

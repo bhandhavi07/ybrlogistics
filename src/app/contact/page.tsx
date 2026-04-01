@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { siteImages } from "../../data/siteImages";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Contact YbrLogistics for routes, partnerships, billing, and operations support.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default function ContactPage() {
   return (

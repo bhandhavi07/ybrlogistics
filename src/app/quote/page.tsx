@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import QuoteForm from "../../components/QuoteForm";
+
+export const metadata: Metadata = {
+  title: "Request a Shipping Quote",
+  description: "Request a shipment quote for state and interstate freight, dedicated routes, and same-day options.",
+  alternates: {
+    canonical: "/quote",
+  },
+};
 
 export default function QuotePage() {
   return (
