@@ -64,12 +64,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  if (phone && phone.length > 30) {
+  if (!phone) {
+    return NextResponse.json({ ok: false, error: "Please provide a phone number." }, { status: 400 });
+  }
+
+  if (phone.length > 30) {
     return NextResponse.json({ ok: false, error: "Phone number is too long." }, { status: 400 });
   }
 
   const digits = phone.replace(/\D/g, "");
-  if (digits && (digits.length < 7 || digits.length > 15)) {
+  if (!digits || digits.length < 7 || digits.length > 15) {
     return NextResponse.json({ ok: false, error: "Please provide a valid phone number." }, { status: 400 });
   }
 

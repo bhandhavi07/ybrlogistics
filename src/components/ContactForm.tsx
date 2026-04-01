@@ -40,7 +40,7 @@ export default function ContactForm() {
       return setError("Please enter your inquiry (at least 10 characters).");
 
     const digits = trimmedPhone.replace(/\D/g, "");
-    if (digits && (digits.length < 7 || digits.length > 15)) {
+    if (!digits || digits.length < 7 || digits.length > 15) {
       return setError("Please enter a valid phone number.");
     }
 
@@ -110,6 +110,7 @@ export default function ContactForm() {
           onChange={(e) => setPhone(e.target.value)}
           placeholder="+1 (___) ___-____"
           type="tel"
+          required
           style={inputStyle}
         />
       </div>
