@@ -404,24 +404,39 @@ export default function HomePageClient() {
         <div className="container">
           <h2 className="homeSectionTitle">On the road &amp; on the job</h2>
           <p className="homeSectionSubtitle">
-            Add real fleet and job-site photography when assets are ready—professional visuals reinforce trust for
-            larger residential and commercial jobs.
+            Professional fleet coverage and organized yard operations for moving, freight, and last-mile work.
           </p>
           <div className="homeVisualTrustGrid homeVisualTrustGrid--two">
             <div className="homeVisualTrustCard card">
-              <div className="homeVisualTrustFrame homeVisualTrustFrame--truck" aria-hidden />
-              <h3 className="homeVisualTrustLabel">Truck photo placeholder</h3>
+              <div className="homeVisualTrustImageWrap">
+                <Image
+                  src={siteImages.homeOnTheRoad.fleet}
+                  alt="Semi truck on the road for regional and line-haul freight"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 460px"
+                  className="homeVisualTrustImg mediaCoverBoost"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <h3 className="homeVisualTrustLabel">Line-haul &amp; fleet</h3>
               <p className="homeVisualTrustHint">
-                Replace with a high-quality image of your truck or fleet branding. Recommended: wide shot, good lighting,
-                readable company markings.
+                Equipment and routing built for dependable state and interstate pickups and deliveries.
               </p>
             </div>
             <div className="homeVisualTrustCard card">
-              <div className="homeVisualTrustFrame homeVisualTrustFrame--job" aria-hidden />
-              <h3 className="homeVisualTrustLabel">Job photo placeholder</h3>
+              <div className="homeVisualTrustImageWrap">
+                <Image
+                  src={siteImages.homeOnTheRoad.yard}
+                  alt="Enclosed trailers and equipment at a logistics yard"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 460px"
+                  className="homeVisualTrustImg mediaCoverBoost"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <h3 className="homeVisualTrustLabel">Yard &amp; staging</h3>
               <p className="homeVisualTrustHint">
-                Replace with a professional moving or freight job photo: loading, secure strapping, or delivery in
-                progress (with customer permission).
+                Secure staging and handling support for freight, moving, and distribution workflows.
               </p>
             </div>
           </div>

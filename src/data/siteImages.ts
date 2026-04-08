@@ -42,6 +42,12 @@ export const siteImages = {
 
   contactAside: px(semiVolvoRoad, 1000),
 
+  /** Homepage “On the road & on the job” — distinct scenes from the hero banner */
+  homeOnTheRoad: {
+    fleet: px(semiVolvoRoad, 1200),
+    yard: px(trailersEnclosed, 1200),
+  },
+
   /**
    * Services grid: each URL is unique (no repeats on /services).
    * Scenes differ from home focus cards (freight color / trailers / sunset) where possible.
