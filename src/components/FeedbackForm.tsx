@@ -3,26 +3,29 @@
 import { useState } from "react";
 import type { CSSProperties, FormEvent } from "react";
 
-const SERVICE_OPTIONS = [
-  "Residential Moving",
-  "Commercial Moving",
-  "Freight Transportation",
-  "Last-Mile Delivery",
-  "Storage and Distribution Support",
-  "Other / Not sure",
-] as const;
+const RATING_SELECT = (
+  <>
+    <option value="">Select…</option>
+    <option value="5">5 — Excellent</option>
+    <option value="4">4 — Good</option>
+    <option value="3">3 — Fair</option>
+    <option value="2">2 — Below expectations</option>
+    <option value="1">1 — Poor</option>
+  </>
+);
 
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+function parseRating(value: string): number | null {
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 1 || n > 5) return null;
+  return n;
 }
 
 export default function FeedbackForm() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [dateOfService, setDateOfService] = useState("");
-  const [rating, setRating] = useState("");
+  const [overallRating, setOverallRating] = useState("");
+  const [staffRating, setStaffRating] = useState("");
+  const [politenessRating, setPolitenessRating] = useState("");
+  const [timingsRating, setTimingsRating] = useState("");
   const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
 
@@ -41,38 +44,27 @@ export default function FeedbackForm() {
     }
 
     const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
-    const trimmedPhone = phone.trim();
-    const trimmedService = serviceType.trim();
-    const trimmedDate = dateOfService.trim();
     const trimmedMessage = message.trim();
-    const ratingNum = Number(rating);
+    const o = parseRating(overallRating);
+    const s = parseRating(staffRating);
+    const p = parseRating(politenessRating);
+    const t = parseRating(timingsRating);
 
-    if (!trimmedName) return setError("Please enter your full name.");
-    if (!trimmedEmail || !isValidEmail(trimmedEmail)) return setError("Please enter a valid email address.");
+    if (!trimmedName) return setError("Please enter your name.");
+    if (o === null) return setError("Please select an overall rating.");
+    if (s === null) return setError("Please select a staff rating.");
+    if (p === null) return setError("Please select a politeness rating.");
+    if (t === null) return setError("Please select a rating for scheduling and timing.");
 
-    if (trimmedPhone) {
-      const digits = trimmedPhone.replace(/\D/g, "");
-      if (!digits || digits.length < 7 || digits.length > 15) {
-        return setError("Please enter a valid phone number or leave it blank.");
-      }
-    }
-
-    if (!trimmedService) return setError("Please select a service type.");
-    if (!trimmedDate) return setError("Please enter the date of service.");
-    if (!rating || !Number.isInteger(ratingNum) || ratingNum < 1 || ratingNum > 5) {
-      return setError("Please select a rating from 1 to 5.");
-    }
-    if (trimmedMessage.length < 10) return setError("Please enter your feedback (at least 10 characters).");
+    if (trimmedMessage.length > 8000) return setError("Message is too long.");
 
     const payload = {
       name: trimmedName,
-      email: trimmedEmail,
-      phone: trimmedPhone || undefined,
-      serviceType: trimmedService,
-      dateOfService: trimmedDate,
-      rating: ratingNum,
-      message: trimmedMessage,
+      overallRating: o,
+      staffRating: s,
+      politenessRating: p,
+      timingsRating: t,
+      message: trimmedMessage || undefined,
     };
 
     try {
@@ -92,11 +84,10 @@ export default function FeedbackForm() {
 
       setSuccess("Thank you for your feedback. We appreciate you taking the time to share your experience.");
       setName("");
-      setEmail("");
-      setPhone("");
-      setServiceType("");
-      setDateOfService("");
-      setRating("");
+      setOverallRating("");
+      setStaffRating("");
+      setPolitenessRating("");
+      setTimingsRating("");
       setMessage("");
     } catch {
       setError("Network error. Please try again in a moment.");
@@ -120,98 +111,75 @@ export default function FeedbackForm() {
         className="contactLeadFormHoneypot"
       />
 
-      <div className="contactLeadFormRow">
-        <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Full name</label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your full name"
-            required
-            style={inputStyle}
-            autoComplete="name"
-          />
-        </div>
-        <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Email address</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            required
-            type="email"
-            style={inputStyle}
-            autoComplete="email"
-          />
-        </div>
-      </div>
-
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Phone number (optional)</label>
+        <label style={{ fontWeight: 800 }}>Name</label>
         <input
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="(408) 366-9696"
-          type="tel"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your name"
+          required
           style={inputStyle}
-          autoComplete="tel"
+          autoComplete="name"
         />
       </div>
 
       <div className="contactLeadFormRow">
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Service type</label>
+          <label style={{ fontWeight: 800 }}>Overall rating</label>
           <select
-            value={serviceType}
-            onChange={(e) => setServiceType(e.target.value)}
+            value={overallRating}
+            onChange={(e) => setOverallRating(e.target.value)}
             required
             style={inputStyle}
           >
-            <option value="">Select a service</option>
-            {SERVICE_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
+            {RATING_SELECT}
           </select>
         </div>
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Date of service</label>
-          <input
-            value={dateOfService}
-            onChange={(e) => setDateOfService(e.target.value)}
-            placeholder="e.g. March 2025 or 2025-03-15"
+          <label style={{ fontWeight: 800 }}>Staff rating</label>
+          <select
+            value={staffRating}
+            onChange={(e) => setStaffRating(e.target.value)}
             required
             style={inputStyle}
-          />
+          >
+            {RATING_SELECT}
+          </select>
+        </div>
+      </div>
+
+      <div className="contactLeadFormRow">
+        <div style={{ display: "grid", gap: 6 }}>
+          <label style={{ fontWeight: 800 }}>Politeness</label>
+          <select
+            value={politenessRating}
+            onChange={(e) => setPolitenessRating(e.target.value)}
+            required
+            style={inputStyle}
+          >
+            {RATING_SELECT}
+          </select>
+        </div>
+        <div style={{ display: "grid", gap: 6 }}>
+          <label style={{ fontWeight: 800 }}>Timings</label>
+          <select
+            value={timingsRating}
+            onChange={(e) => setTimingsRating(e.target.value)}
+            required
+            style={inputStyle}
+          >
+            {RATING_SELECT}
+          </select>
         </div>
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Rating (1 to 5)</label>
-        <select
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-          required
-          style={inputStyle}
-        >
-          <option value="">Select a rating</option>
-          <option value="5">5 — Excellent</option>
-          <option value="4">4 — Good</option>
-          <option value="3">3 — Fair</option>
-          <option value="2">2 — Below expectations</option>
-          <option value="1">1 — Poor</option>
-        </select>
-      </div>
-
-      <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Feedback message</label>
+        <label style={{ fontWeight: 800 }}>Message (optional)</label>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Tell us about your experience with YBR Logistics..."
-          required
-          style={{ ...inputStyle, minHeight: 140, resize: "vertical" }}
+          placeholder="Anything else you would like us to know..."
+          style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
         />
       </div>
 
