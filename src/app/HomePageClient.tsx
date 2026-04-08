@@ -4,7 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { HomeBulletIcon } from "../components/home/HomeBulletIcon";
+import { ServiceIcon } from "../components/service/ServiceIcons";
 import { siteImages } from "../data/siteImages";
+import { servicesCatalog } from "../data/services";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -23,39 +25,43 @@ const staggerItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOut } },
 };
 
+const trustPills = [
+  "Licensed and insured",
+  "California-based operations",
+  "State and interstate service",
+  "Residential, commercial, and freight support",
+  "Quotes with clear next steps",
+];
+
+const whyChooseBullets: { text: string; icon: "route" | "clock" | "package" | "chat" }[] = [
+  { text: "On-time pickup and delivery coordination", icon: "route" },
+  { text: "Responsive dispatch communication", icon: "chat" },
+  { text: "Residential and commercial moving support", icon: "package" },
+  { text: "Freight and last-mile delivery coverage", icon: "clock" },
+  { text: "Careful handling for high-value and time-sensitive jobs", icon: "package" },
+];
+
+const faqItems = [
+  {
+    q: "Do you require a deposit?",
+    a: "Yes. A deposit may be required to confirm your booking.",
+  },
+  {
+    q: "When is the remaining balance due?",
+    a: "The remaining balance is typically due upon unloading or completion of service unless other written terms apply.",
+  },
+  {
+    q: "Do you discuss extra charges first?",
+    a: "Yes. Any additional charges outside the original estimate are discussed before being added whenever reasonably possible.",
+  },
+  {
+    q: "Do you handle both moving and freight jobs?",
+    a: "Yes. We support residential moving, commercial moving, freight transportation, and last-mile delivery.",
+  },
+];
+
 export default function HomePageClient() {
   const reduceMotion = useReducedMotion();
-
-  const focusAreas = [
-    {
-      title: "Plan & move freight",
-      body: "On-time pickups and deliveries backed by active dispatch updates.",
-      image: siteImages.homeFocus.freight,
-      imageAlt: "Semi truck on the highway for freight planning",
-      href: "/services",
-    },
-    {
-      title: "Store & distribute",
-      body: "Warehouse and distribution support that keeps outbound freight moving.",
-      image: siteImages.homeFocus.storage,
-      imageAlt: "White enclosed trailers for storage and distribution",
-      href: "/services",
-    },
-    {
-      title: "Moving & relocation support",
-      body: "Residential and commercial relocation with clear scheduling and careful handling.",
-      image: siteImages.homeFocus.urgent,
-      imageAlt: "Commercial freight trailers for moving and relocation support",
-      href: "/services",
-    },
-  ];
-
-  const whyBullets: { text: string; icon: "route" | "clock" | "package" | "chat" }[] = [
-    { text: "On-time deliveries with dedicated route planning", icon: "route" },
-    { text: "Same-day availability for urgent lane coverage", icon: "clock" },
-    { text: "Handling discipline for freight, moving, and relocation jobs", icon: "package" },
-    { text: "Fast response from one dispatch contact", icon: "chat" },
-  ];
 
   const motionIntro = reduceMotion ? {} : { initial: "hidden", whileInView: "visible", viewport: { once: true, margin: "-60px" }, variants: fadeUp };
   const motionStagger = reduceMotion
@@ -69,7 +75,7 @@ export default function HomePageClient() {
         <div className="heroBleedMedia" aria-hidden>
           <Image
             src={siteImages.heroBanner}
-            alt="Commercial freight truck on the highway"
+            alt="Commercial freight and moving operations"
             fill
             priority
             sizes="100vw"
@@ -81,106 +87,102 @@ export default function HomePageClient() {
         </div>
         <div className="container heroBleedContent">
           <div className="heroBleedInner">
-            <div className="reveal heroBleedKicker">YbrLogistics</div>
+            <div className="reveal heroBleedKicker">YBR Logistics</div>
             <h1 className="reveal revealDelay1 heroBleedTitle">
-              Freight & last-mile delivery across state and interstate routes — fast, reliable, and on time
+              Reliable Moving, Freight, and Last-Mile Delivery Across California and Interstate Routes
             </h1>
             <p className="reveal revealDelay2 heroBleedLead">
-              State and interstate coverage with on-time deliveries and fast dispatch response.
+              YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery
+              with clear scheduling, responsive communication, and careful handling from pickup to final delivery.
             </p>
-            <div className="reveal revealDelay2 heroBleedActions">
+            <div className="reveal revealDelay2 heroBleedActions heroBleedActions--split">
               <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
                 Get a Quote
               </Link>
+              <a className="btn btn-secondary btn-lg" href="tel:+14083669696">
+                Call (408) 366-9696
+              </a>
             </div>
-            <p className="heroBleedTrust">Serving state and interstate routes</p>
+            <p className="heroBleedTrust">California-based · Licensed &amp; insured · State &amp; interstate</p>
           </div>
         </div>
       </section>
 
-      <section className="homeTrustStrip" aria-label="Trust metrics">
+      <section className="homeTrustBadges" aria-label="Trust highlights">
+        <div className="container">
+          <ul className="homeTrustBadgesList">
+            {trustPills.map((label) => (
+              <li key={label} className="homeTrustBadge">
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="homeTrustStrip" aria-label="Operations">
         <div className="container homeTrustStripInner">
-          <span>100+ shipments handled</span>
-          <span>98% on-time delivery</span>
-          <span>24/7 support</span>
+          <span>Written estimates &amp; clear scheduling</span>
+          <span>High-value &amp; time-sensitive job experience</span>
+          <span>Direct communication from quote to delivery</span>
         </div>
       </section>
 
-      <motion.section className="section sectionLoose" {...motionIntro}>
-        <div className="container homeIntroGrid">
-          <div className="homeIntroCopy">
-            <h2 className="homeSectionTitle">Why teams work with us</h2>
-            <p className="homeIntroLead">
-              Outcomes first—so you spend less time chasing status and more time running the business.
-            </p>
-            <ul className="homeBulletList">
-              {whyBullets.map((b) => (
-                <li key={b.text} className="homeBulletItem">
-                  <span className="homeBulletIconWrap" aria-hidden>
-                    <HomeBulletIcon variant={b.icon} />
-                  </span>
-                  <span>{b.text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <Link href="/services" prefetch={false} className="homeIntroCard card">
-            <div className="homeIntroCardImageWrap">
-              <Image
-                src={siteImages.heroCard}
-                alt="Semi truck on the highway for regional and line-haul freight"
-                fill
-                sizes="(max-width: 900px) 100vw, 40vw"
-                className="homeIntroCardImg"
-                style={{ objectFit: "cover" }}
-              />
+      <section className="section sectionLoose homeLicensedBanner" aria-label="Licensed operations">
+        <div className="container">
+          <div className="homeLicensedBannerInner card">
+            <div className="homeLicensedBannerIcon" aria-hidden>
+              ✓
             </div>
-            <div className="homeIntroCardBody">
-              <div className="homeIntroCardTitle">Regional & long-haul reach</div>
-              <p className="homeIntroCardText">
-                Dependable pickups and deliveries across the lanes you run—from local routes to broader regional and
-                line-haul needs.
+            <div>
+              <div className="homeLicensedBannerTitle">Licensed &amp; insured logistics</div>
+              <p className="homeLicensedBannerText">
+                Moving, freight, and last-mile delivery with documentation and professional standards customers and
+                partners expect for larger jobs.
               </p>
-              <span className="homeIntroCardHint">View services →</span>
             </div>
-          </Link>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       <section className="section sectionLoose">
         <div className="container">
-          <h2 className="homeSectionTitle">How we support your operations</h2>
+          <h2 className="homeSectionTitle">Services built for real jobs</h2>
           <p className="homeSectionSubtitle">
-            Three focused capabilities that reduce delays and keep deliveries moving.
+            From household moves to freight lanes and final-mile delivery — structured processes and clear communication
+            at every step.
           </p>
 
-          <motion.div className="homeFocusGrid" {...motionStagger}>
-            {focusAreas.map((item) => (
-              <motion.div key={item.title} {...motionCard} style={{ height: "100%" }}>
-                <Link href={item.href} prefetch={false} className="homeFocusCard card cardElevated">
-                  <div className="homeFocusCardImageWrap">
-                    <Image
-                      src={item.image}
-                      alt={item.imageAlt}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 33vw"
-                      className="homeFocusCardImg"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
-                  <div className="homeFocusCardBody">
-                    <div className="homeFocusCardTitle">{item.title}</div>
-                    <p className="homeFocusCardText">{item.body}</p>
-                  </div>
-                </Link>
-              </motion.div>
+          <div className="homeServiceCardGrid">
+            {servicesCatalog.map((s) => (
+              <article key={s.title} className="homeServiceCard card cardElevated">
+                <div className="homeServiceCardImageWrap">
+                  <Image
+                    src={s.image}
+                    alt={s.imageAlt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
+                    className="homeServiceCardImg"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div className="homeServiceCardBody">
+                  <span className="homeServiceCardIconWrap" aria-hidden>
+                    <ServiceIcon id={s.icon} />
+                  </span>
+                  <h3 className="homeServiceCardTitle">{s.title}</h3>
+                  <p className="homeServiceCardDesc">{s.body}</p>
+                  <p className="homeServiceCardBestFor">
+                    <strong>Best for:</strong> {s.bestFor}
+                  </p>
+                </div>
+              </article>
             ))}
-          </motion.div>
+          </div>
 
           <div className="homeViewAllWrap">
             <Link className="btn btn-ghost homeViewAllBtn" href="/services" prefetch={false}>
-              View Services
+              View all services
               <svg className="homeViewAllBtnIcon" viewBox="0 0 24 24" width="18" height="18" aria-hidden>
                 <path
                   fill="currentColor"
@@ -192,26 +194,143 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      <section className="section sectionLoose homePaymentSection" aria-label="Payment process">
+        <div className="container">
+          <div className="homePaymentGrid">
+            <div className="homePaymentHighlight card">
+              <div className="homePaymentHighlightLabel">How billing works</div>
+              <p className="homePaymentHighlightText">
+                Deposit required to confirm booking. Remaining balance due upon unloading or service completion. Any
+                additional charges are discussed and approved before being added.
+              </p>
+            </div>
+            <div className="homePaymentDetail card">
+              <h2 className="homeSectionTitle homeSectionTitle--left">How our payment process works</h2>
+              <p className="homePaymentIntro">
+                To keep every job clear and organized, we use a simple payment process:
+              </p>
+              <ol className="homePaymentSteps">
+                <li>We review your move or shipment details and provide a written estimate.</li>
+                <li>A deposit is collected to confirm your booking date.</li>
+                <li>
+                  The remaining balance is due upon unloading or completion of service, unless otherwise stated in
+                  writing.
+                </li>
+                <li>
+                  Any additional work requested outside the original estimate will be discussed and approved before extra
+                  charges are added.
+                </li>
+              </ol>
+              <Link href="/terms-and-conditions" prefetch={false} className="homePaymentLegalLink">
+                Read full terms →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <motion.section className="section sectionLoose" {...motionIntro}>
+        <div className="container homeIntroGrid">
+          <div className="homeIntroCopy">
+            <h2 className="homeSectionTitle">Why customers choose YBR Logistics</h2>
+            <p className="homeIntroLead">
+              Straightforward scheduling, responsive updates, and careful handling — especially important when jobs
+              involve significant value and tight timelines.
+            </p>
+            <ul className="homeBulletList">
+              {whyChooseBullets.map((b) => (
+                <li key={b.text} className="homeBulletItem">
+                  <span className="homeBulletIconWrap" aria-hidden>
+                    <HomeBulletIcon variant={b.icon} />
+                  </span>
+                  <span>{b.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <Link href="/about" prefetch={false} className="homeIntroCard card">
+            <div className="homeIntroCardImageWrap">
+              <Image
+                src={siteImages.heroCard}
+                alt="Professional trucking and logistics"
+                fill
+                sizes="(max-width: 900px) 100vw, 40vw"
+                className="homeIntroCardImg"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div className="homeIntroCardBody">
+              <div className="homeIntroCardTitle">Our standards</div>
+              <p className="homeIntroCardText">
+                Written estimates, honest scope discussions, and professional execution from pickup through delivery.
+              </p>
+              <span className="homeIntroCardHint">About YBR Logistics →</span>
+            </div>
+          </Link>
+        </div>
+      </motion.section>
+
+      <section className="section sectionLoose homePlaceholderSection" aria-label="Social proof">
+        <div className="container">
+          <div className="homePlaceholderGrid">
+            <div className="homePlaceholderCard card">
+              <h3 className="homePlaceholderTitle">Customer testimonials</h3>
+              <p className="homePlaceholderText">
+                We&apos;re collecting reviews from recent moves and freight jobs. Check back soon, or ask us for
+                references when you request a quote.
+              </p>
+            </div>
+            <div className="homePlaceholderCard card homePlaceholderCard--photo">
+              <h3 className="homePlaceholderTitle">On the job</h3>
+              <p className="homePlaceholderText">
+                Placeholder for real truck and job-site photography. Replace with your fleet and crew photos when
+                ready.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <motion.section className="section sectionLoose" {...motionStagger}>
+        <div className="container">
+          <h2 className="homeSectionTitle">Common questions</h2>
+          <p className="homeSectionSubtitle">Straight answers about deposits, billing, and how we work.</p>
+          <div className="homeFaqGrid">
+            {faqItems.map((item) => (
+              <motion.div key={item.q} className="homeFaqItem card" {...motionCard}>
+                <div className="homeFaqQ">{item.q}</div>
+                <p className="homeFaqA">{item.a}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
       <motion.section className="section sectionLoose sectionCta" {...(reduceMotion ? {} : { initial: "hidden", whileInView: "visible", viewport: { once: true }, variants: fadeUp })}>
         <div className="container">
           <div className="homeCtaStrip card">
             <div className="homeCtaGrid">
               <div className="homeCtaCopy">
-                <h2 className="homeCtaTitle">Get your shipment quote in minutes</h2>
+                <h2 className="homeCtaTitle">Need a quote for moving, freight, or delivery services?</h2>
                 <p className="homeCtaText">
-                  Share pickup, delivery, shipment type, and target date. We&apos;ll send a clear quote with next steps.
+                  Send us your pickup location, delivery location, service type, and preferred date. We will respond with
+                  a clear quote and next steps.
                 </p>
-                <p className="homeCtaUrgency">Response within 24 hours</p>
-                <div className="homeCtaActions">
+                <p className="homeCtaUrgency">Response within 24 hours · Written estimates available</p>
+                <div className="homeCtaActions homeCtaActions--split">
                   <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
                     Get a Quote
                   </Link>
+                  <a className="btn btn-secondary btn-lg" href="tel:+14083669696">
+                    Call (408) 366-9696
+                  </a>
                 </div>
               </div>
               <div className="homeCtaMedia">
                 <Image
                   src={siteImages.splitWarehouse}
-                  alt="Enclosed trailers and logistics yard operations"
+                  alt="Logistics yard and enclosed trailers"
                   fill
                   sizes="(max-width: 900px) 100vw, 40vw"
                   className="homeCtaMediaImg mediaCoverBoost"

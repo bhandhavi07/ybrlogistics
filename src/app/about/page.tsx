@@ -4,49 +4,42 @@ import type { Metadata } from "next";
 import { siteImages } from "../../data/siteImages";
 
 export const metadata: Metadata = {
-  title: "About YbrLogistics",
-  description: "Learn how YbrLogistics supports businesses with on-time freight planning across state and interstate routes.",
+  title: "About YBR Logistics",
+  description:
+    "YBR Logistics is a California-based logistics company providing moving, freight transportation, and last-mile delivery for residential and commercial customers.",
   alternates: {
     canonical: "/about",
   },
 };
 
+const values = [
+  "Reliability in scheduling and service",
+  "Clear communication from quote to completion",
+  "Careful handling of customer property",
+  "Honest pricing with written estimates",
+  "Professional service on every job",
+];
+
 export default function AboutPage() {
-  const trustStats = [
-    { label: "Years supporting freight operations", value: "8+" },
-    { label: "Deliveries coordinated", value: "5,000+" },
-    { label: "Primary coverage", value: "State and Interstate" },
-  ];
-
-  const whoWeServe = [
-    "Small businesses shipping weekly inventory",
-    "E-commerce teams with daily dispatch needs",
-    "Retail and distribution partners managing multi-stop deliveries",
-  ];
-
-  const whyChooseUs = [
-    "On-time deliveries with dedicated routes",
-    "Same-day availability for urgent shipments",
-    "Fast response and clear next-step communication",
-  ];
-
   return (
     <section className="section">
       <div className="container">
-        <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>About Us</h1>
-        <p style={{ margin: "12px 0 14px", color: "var(--muted)", lineHeight: 1.7, fontSize: 16, maxWidth: 820 }}>
-          We help businesses move freight reliably without delays or confusion.
+        <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>About YBR Logistics</h1>
+        <p style={{ margin: "14px 0 16px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
+          YBR Logistics is a California-based logistics company providing moving, freight transportation, and last-mile
+          delivery services for residential and commercial customers. We focus on reliable scheduling, direct
+          communication, and careful handling so every job is completed professionally and on time.
         </p>
-        <p style={{ margin: "0 0 22px", color: "var(--muted)", lineHeight: 1.7, fontSize: 16, maxWidth: 820 }}>
-          Our team plans shipments around your pickup windows, delivery commitments, and handling requirements so your
-          operations stay on schedule.
+        <p style={{ margin: "0 0 24px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
+          Our team supports both state and interstate routes, helping customers move household goods, business
+          equipment, freight, and scheduled deliveries with confidence.
         </p>
 
         <div className="card" style={{ padding: 0, overflow: "hidden", marginBottom: 22 }}>
           <div className="aboutLeadImage">
             <Image
               src={siteImages.aboutMain}
-              alt="Commercial truck on the road with motion blur for over-the-road operations"
+              alt="Commercial truck on the road for logistics and moving operations"
               fill
               sizes="(max-width: 640px) 100vw, 80vw"
               className="mediaImg mediaCoverBoost"
@@ -57,26 +50,26 @@ export default function AboutPage() {
           <div style={{ padding: 20 }}>
             <div style={{ fontWeight: 950, fontSize: 18 }}>How we work with customers</div>
             <div style={{ color: "var(--muted)", marginTop: 8, fontWeight: 650, lineHeight: 1.7 }}>
-              We build shipment plans around real constraints and keep communication active from dispatch to delivery.
-              You get updates early, not after delays happen.
+              We align on scope up front, provide written estimates when applicable, and keep dispatch communication
+              active through pickup and delivery—especially important for high-value moves and time-sensitive freight.
             </div>
           </div>
         </div>
 
-        <div className="aboutValuesGrid" style={{ marginBottom: 18 }}>
-          {trustStats.map((item) => (
-            <div key={item.label} className="card cardLift" style={{ padding: 18 }}>
-              <div style={{ fontSize: 26, fontWeight: 900, color: "var(--accent-red)" }}>{item.value}</div>
-              <div style={{ color: "var(--muted)", marginTop: 8, fontWeight: 700, lineHeight: 1.5 }}>{item.label}</div>
-            </div>
-          ))}
+        <div className="card" style={{ padding: 22, marginBottom: 22 }}>
+          <div style={{ fontWeight: 900, fontSize: 18, marginBottom: 12 }}>Our values</div>
+          <ul style={{ margin: 0, paddingLeft: 20, color: "var(--muted)", fontWeight: 650, lineHeight: 1.75 }}>
+            {values.map((v) => (
+              <li key={v}>{v}</li>
+            ))}
+          </ul>
         </div>
 
         <div className="aboutPhotoRow">
           <div className="aboutGalleryThumb">
             <Image
               src={siteImages.aboutGallery.intermodal}
-              alt="Freeway traffic for intermodal and long-distance connectivity"
+              alt="Freeway operations for long-distance logistics"
               fill
               sizes="(max-width: 900px) 100vw, 33vw"
               className="mediaImg mediaCoverBoost"
@@ -86,7 +79,7 @@ export default function AboutPage() {
           <div className="aboutGalleryThumb">
             <Image
               src={siteImages.aboutGallery.warehouse}
-              alt="Fleet vehicles parked at a logistics yard for staging and distribution"
+              alt="Fleet and staging yard for distribution support"
               fill
               sizes="(max-width: 900px) 100vw, 33vw"
               className="mediaImg mediaCoverBoost"
@@ -105,39 +98,16 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="aboutValuesGrid">
-          <div className="card cardLift" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900, lineHeight: 1.25 }}>Who we serve</div>
-            <ul style={{ margin: "10px 0 0", paddingLeft: 18, color: "var(--muted)", fontWeight: 600, lineHeight: 1.6 }}>
-              {whoWeServe.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="card cardLift" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900, lineHeight: 1.25 }}>Why choose us</div>
-            <ul style={{ margin: "10px 0 0", paddingLeft: 18, color: "var(--muted)", fontWeight: 600, lineHeight: 1.6 }}>
-              {whyChooseUs.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="card cardLift" style={{ padding: 18 }}>
-            <div style={{ fontWeight: 900, lineHeight: 1.25 }}>Where we operate</div>
-            <div style={{ color: "var(--muted)", marginTop: 10, fontWeight: 600, lineHeight: 1.6 }}>
-              We serve state and interstate routes, with extended support for regional and long-haul schedules when
-              your lanes require it.
-            </div>
-          </div>
-        </div>
-
         <div style={{ marginTop: 22 }} className="card">
           <div style={{ padding: 22 }}>
-            <div style={{ fontWeight: 900, fontSize: 18 }}>Explore our full service catalog</div>
+            <div style={{ fontWeight: 900, fontSize: 18 }}>Ready for a written quote?</div>
             <div style={{ color: "var(--muted)", marginTop: 8, fontWeight: 600, lineHeight: 1.7 }}>
-              Review service types, use cases, and coverage before requesting a shipment quote.
+              Share your pickup and delivery details—we&apos;ll respond with clear pricing and next steps.
             </div>
-            <div style={{ marginTop: 16 }}>
+            <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <Link className="btn btn-primary" href="/quote" prefetch={false}>
+                Get a Quote
+              </Link>
               <Link className="btn btn-ghost" href="/services" prefetch={false}>
                 View Services
               </Link>

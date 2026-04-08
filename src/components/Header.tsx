@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
 ];
@@ -100,7 +100,7 @@ export default function Header() {
         </nav>
       </div>
       <div className="siteServiceAreaBar" role="note" aria-label="Service area">
-        Serving state and interstate routes
+        California &amp; interstate — moving, freight &amp; last-mile delivery
       </div>
     </header>
   );

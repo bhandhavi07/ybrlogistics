@@ -2,10 +2,20 @@ import type { Metadata } from "next";
 import HomePageClient from "./HomePageClient";
 
 export const metadata: Metadata = {
-  title: "State & Interstate Freight and Last-Mile Delivery",
-  description: "Get fast quotes for state and interstate freight, last-mile delivery, and dedicated routes.",
+  title: "YBR Logistics | Moving, Freight & Last-Mile Delivery in California",
+  description:
+    "YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery across California and interstate routes. Request a quote today.",
   alternates: {
-    canonical: "/",
+    canonical: "https://www.ybrlogistics.com/",
+  },
+  openGraph: {
+    title: "YBR Logistics | Moving, Freight & Last-Mile Delivery in California",
+    description:
+      "YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery across California and interstate routes. Request a quote today.",
+    url: "https://www.ybrlogistics.com",
+    siteName: "YBR Logistics",
+    locale: "en_US",
+    type: "website",
   },
 };
 

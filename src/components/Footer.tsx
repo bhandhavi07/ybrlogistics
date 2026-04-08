@@ -1,10 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const footerLinks = [
+const footerExplore = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
+  { href: "/quote", label: "Get a Quote" },
+];
+
+const footerLegal = [
+  { href: "/terms-and-conditions", label: "Terms & Conditions" },
+  { href: "/refund-policy", label: "Refund Policy" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
 ];
 
 export default function Footer() {
@@ -14,10 +22,10 @@ export default function Footer() {
       <div className="container">
         <div className="siteFooterGrid">
           <div className="siteFooterBrand">
-            <Link href="/" className="siteFooterLogoLink" aria-label="YbrLogistics home">
+            <Link href="/" className="siteFooterLogoLink" aria-label="YBR Logistics home">
               <Image
                 src="/logo.png"
-                alt="YbrLogistics"
+                alt="YBR Logistics"
                 width={160}
                 height={95}
                 sizes="140px"
@@ -25,7 +33,20 @@ export default function Footer() {
               />
             </Link>
             <p className="siteFooterTagline">
-              On-time deliveries, same-day availability, moving & relocation, and dedicated state and interstate routes.
+              <strong>YBR Logistics</strong>
+              <br />
+              24240 Nora Cir, Hayward, CA 94545
+              <br />
+              <a href="tel:+14083669696" className="siteFooterPhone">
+                (408) 366-9696
+              </a>
+              <br />
+              <a href="mailto:Sandeep@ybrlogistics.com" className="siteFooterPhone">
+                Sandeep@ybrlogistics.com
+              </a>
+            </p>
+            <p className="siteFooterSupport">
+              Licensed and insured logistics support for moving, freight, and last-mile delivery.
             </p>
             <div className="siteFooterSocial" aria-label="Social">
               <a
@@ -62,7 +83,7 @@ export default function Footer() {
           <div className="siteFooterCol">
             <div className="siteFooterHeading">Explore</div>
             <ul className="siteFooterLinks">
-              {footerLinks.map((l) => (
+              {footerExplore.map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} prefetch={false} className="siteFooterLink">
                     {l.label}
@@ -73,27 +94,23 @@ export default function Footer() {
           </div>
 
           <div className="siteFooterCol">
-            <div className="siteFooterHeading">Contact</div>
-            <address className="siteFooterAddress">
-              24240 Nora Cir
-              <br />
-              Hayward, CA 94545
-              <br />
-              <a href="tel:+14083669696" className="siteFooterPhone">
-                +1 (408) 366-9696
-              </a>
-              <br />
-              <a href="mailto:Sandeep@ybrlogistics.com" className="siteFooterPhone">
-                Sandeep@ybrlogistics.com
-              </a>
-            </address>
+            <div className="siteFooterHeading">Legal</div>
+            <ul className="siteFooterLinks">
+              {footerLegal.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} prefetch={false} className="siteFooterLink">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
       <div className="siteFooterBar">
         <div className="container siteFooterBarInner">
-          <span>© {year} YbrLogistics. All rights reserved.</span>
+          <span>© {year} YBR Logistics. All rights reserved.</span>
         </div>
       </div>
     </footer>

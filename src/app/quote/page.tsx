@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import QuoteForm from "../../components/QuoteForm";
 
 export const metadata: Metadata = {
-  title: "Request a Shipping Quote",
-  description: "Request a shipment quote for state and interstate freight, dedicated routes, and same-day options.",
+  title: "Request a Quote",
+  description:
+    "Request a quote for moving, freight, or last-mile delivery across California and interstate routes. Written estimates and clear next steps.",
   alternates: {
     canonical: "/quote",
   },
@@ -14,9 +15,10 @@ export default function QuotePage() {
     <section className="section">
       <div className="container">
         <div style={{ marginBottom: 22 }}>
-          <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>Request a Shipping Quote</h1>
+          <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>Request a Quote</h1>
           <p style={{ margin: "12px 0 0", color: "var(--muted)", lineHeight: 1.7, fontSize: 16 }}>
-            Share your shipment details for state and interstate coverage and we&apos;ll send your quote quickly.
+            Share your move or shipment details for California and interstate coverage—we&apos;ll respond with a clear
+            quote and next steps.
           </p>
           <p style={{ margin: "12px 0 0", color: "var(--muted)", fontWeight: 700, fontSize: 14 }}>
             Takes less than 1 minute to fill
@@ -33,7 +35,7 @@ export default function QuotePage() {
               <li>Fast response within 24 hours</li>
               <li>Dedicated routes available</li>
               <li>Same-day delivery options</li>
-              <li>Serving state and interstate routes</li>
+              <li>Serving California &amp; state and interstate routes</li>
             </ul>
             <p style={{ margin: "12px 0 0", color: "var(--muted)", lineHeight: 1.7, fontSize: 15 }}>
               Share your shipment details and we&apos;ll send the next steps clearly.

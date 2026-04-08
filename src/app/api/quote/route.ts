@@ -156,7 +156,7 @@ export async function POST(req: Request) {
   const SMTP_PASS = env("SMTP_PASS");
   const CONTACT_TO = env("CONTACT_TO");
   const CONTACT_FROM = env("CONTACT_FROM") || SMTP_USER;
-  const SMTP_FROM_NAME = env("SMTP_FROM_NAME") || "YbrLogistics";
+  const SMTP_FROM_NAME = env("SMTP_FROM_NAME") || "YBR Logistics";
 
   const smtpUseJsonTransport = (env("SMTP_USE_JSON_TRANSPORT") || "").toLowerCase();
   const useJsonTransport = smtpUseJsonTransport === "true" || smtpUseJsonTransport === "1";

@@ -12,7 +12,7 @@ const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "YbrLogistics",
+  name: "YBR Logistics",
   url: siteUrl,
   telephone: "+1-408-366-9696",
   email: "Sandeep@ybrlogistics.com",
@@ -24,25 +24,25 @@ const localBusinessJsonLd = {
     postalCode: "94545",
     addressCountry: "US",
   },
-  areaServed: "State and interstate routes",
-  description: "Freight and last-mile delivery with same-day options and dedicated routes.",
+  areaServed: ["California", "State and interstate routes"],
+  description:
+    "Residential and commercial moving, freight transportation, and last-mile delivery with written estimates and professional service.",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "YbrLogistics - State & Interstate Freight & Last-Mile Delivery",
-    template: "%s | YbrLogistics",
+    default: "YBR Logistics | Moving, Freight & Last-Mile Delivery in California",
+    template: "%s | YBR Logistics",
   },
-  description: "On-time deliveries, same-day options, and dedicated freight services across state and interstate routes.",
-  alternates: {
-    canonical: "/",
-  },
+  description:
+    "YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery across California and interstate routes.",
   openGraph: {
-    title: "YbrLogistics - State & Interstate Freight & Last-Mile Delivery",
-    description: "On-time deliveries, same-day options, and dedicated freight services across state and interstate routes.",
+    title: "YBR Logistics | Moving, Freight & Last-Mile Delivery in California",
+    description:
+      "YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery across California and interstate routes.",
     url: siteUrl,
-    siteName: "YbrLogistics",
+    siteName: "YBR Logistics",
     locale: "en_US",
     type: "website",
   },
@@ -77,4 +77,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-

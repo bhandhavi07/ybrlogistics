@@ -5,8 +5,9 @@ import { ServiceIcon } from "../../components/service/ServiceIcons";
 import { servicesCatalog } from "../../data/services";
 
 export const metadata: Metadata = {
-  title: "Logistics Services",
-  description: "Explore freight transportation, last-mile, dedicated routes, and moving support from YbrLogistics.",
+  title: "Moving, Freight & Delivery Services",
+  description:
+    "Residential moving, commercial moving, freight transportation, last-mile delivery, and storage support from YBR Logistics across California and interstate routes.",
   alternates: {
     canonical: "/services",
   },
@@ -17,10 +18,10 @@ export default function ServicesPage() {
     <section className="section servicesSection">
       <div className="container">
         <header className="servicesPageHead">
-          <h1 className="servicesPageTitle">End-to-End Logistics Services</h1>
+          <h1 className="servicesPageTitle">Services for Moving, Freight &amp; Last-Mile Delivery</h1>
           <p className="servicesPageSubtitle">
-            Serving state and interstate routes with on-time deliveries, dedicated routes, same-day availability, and
-            moving & relocation support.
+            California-based operations with state and interstate coverage—structured quotes, clear communication, and
+            careful handling for residential, commercial, and freight jobs.
           </p>
         </header>
 
