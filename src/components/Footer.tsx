@@ -7,6 +7,7 @@ const footerExplore = [
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
   { href: "/quote", label: "Get a Quote" },
+  { href: "/feedback", label: "Leave Feedback" },
 ];
 
 const footerLegal = [
@@ -43,6 +44,10 @@ export default function Footer() {
               <br />
               <a href="mailto:Sandeep@ybrlogistics.com" className="siteFooterPhone">
                 Sandeep@ybrlogistics.com
+              </a>
+              <br />
+              <a href="https://www.ybrlogistics.com" className="siteFooterPhone" rel="noopener noreferrer">
+                www.ybrlogistics.com
               </a>
             </p>
             <p className="siteFooterSupport">

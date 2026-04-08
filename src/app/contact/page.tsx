@@ -23,7 +23,11 @@ export default function ContactPage() {
         </p>
         <p style={{ margin: "12px 0 28px", color: "var(--muted)", lineHeight: 1.7, fontSize: 16, maxWidth: 720 }}>
           Request a quote or ask a question about moving, freight, or delivery. Use the form below or reach us directly
-          by phone or email.
+          by phone or email.{" "}
+          <Link href="/feedback" prefetch={false} style={{ fontWeight: 800, color: "var(--accent-red)" }}>
+            Leave feedback
+          </Link>{" "}
+          if you&apos;ve already used our services.
         </p>
 
         <div className="contactGrid contactGrid--wide">
@@ -59,8 +63,8 @@ export default function ContactPage() {
                 </div>
                 <div style={{ marginTop: 10 }}>
                   <span style={{ fontWeight: 900, color: "var(--text)" }}>Website:</span>{" "}
-                  <a href="https://ybrlogistics.com" style={{ fontWeight: 800 }}>
-                    ybrlogistics.com
+                  <a href="https://www.ybrlogistics.com" style={{ fontWeight: 800 }}>
+                    www.ybrlogistics.com
                   </a>
                 </div>
               </div>

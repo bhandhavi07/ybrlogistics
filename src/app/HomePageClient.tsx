@@ -35,28 +35,15 @@ const trustFoundationItems: {
   { label: "State and Interstate Routes", icon: "route" },
   { label: "Written Estimates", icon: "document" },
   { label: "Clear Booking and Payment Process", icon: "payment" },
-  { label: "Direct Phone and Email Support", icon: "contact" },
+  { label: "Direct Support by Phone and Email", icon: "contact" },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Professional, responsive, and easy to work with from start to finish. The team communicated clearly and handled the move carefully.",
-    attribution: "Placeholder Customer",
-    location: "San Jose, CA",
-  },
-  {
-    quote:
-      "Great experience with scheduling, pickup, and delivery. Everything was explained clearly, including pricing and timing.",
-    attribution: "Placeholder Customer",
-    location: "Fremont, CA",
-  },
-  {
-    quote:
-      "Reliable service and good communication throughout the job. I appreciated the written estimate and organized process.",
-    attribution: "Placeholder Customer",
-    location: "Hayward, CA",
-  },
+const businessCredentials = [
+  "Active carrier authority",
+  "USDOT: 3252374",
+  "MC: 1092818",
+  "Licensed & insured",
+  "California-based operations",
 ];
 
 function TrustFoundationIcon({ id }: { id: (typeof trustFoundationItems)[number]["icon"] }) {
@@ -200,13 +187,13 @@ export default function HomePageClient() {
               YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery
               with clear scheduling, responsive communication, and careful handling from pickup to final delivery.
             </p>
-            <div className="reveal revealDelay2 heroBleedActions heroBleedActions--split">
+            <div className="reveal revealDelay2 heroBleedActions heroBleedActions--primary">
               <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
                 Get a Quote
               </Link>
-              <a className="btn btn-secondary btn-lg" href="tel:+14083669696">
-                Call (408) 366-9696
-              </a>
+              <Link className="heroBleedSecondaryLink" href="/contact" prefetch={false}>
+                Contact Us
+              </Link>
             </div>
             <p className="heroBleedTrust">California-based · Licensed &amp; insured · State &amp; interstate</p>
           </div>
@@ -217,12 +204,11 @@ export default function HomePageClient() {
         <div className="container">
           <div className="homeTrustFoundationHeader">
             <span className="homeTrustFoundationEyebrow">Licensed &amp; insured</span>
-            <h2 className="homeTrustFoundationTitle">
-              Trusted Logistics Support for Residential, Commercial, and Freight Jobs
-            </h2>
+            <h2 className="homeTrustFoundationTitle">Trusted Moving, Freight, and Logistics Support</h2>
             <p className="homeTrustFoundationIntro">
-              YBR Logistics provides reliable moving, freight, and last-mile delivery support with clear communication,
-              written estimates, and professional handling from pickup to final delivery.
+              YBR Logistics provides reliable residential moving, commercial moving, freight transportation, and last-mile
+              delivery with clear communication, written estimates, and professional handling from pickup to final
+              delivery.
             </p>
           </div>
 
@@ -323,32 +309,19 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <section className="section sectionLoose homeTestimonialsSection" aria-label="Customer testimonials">
+      <section className="section sectionLoose homeCredentialsSection" aria-label="Business credentials">
         <div className="container">
-          <h2 className="homeSectionTitle">What Customers Say</h2>
-          <p className="homeSectionSubtitle homeTestimonialsSubtitle">
-            Residential, commercial, and freight customers value clear communication and careful handling on every job.
+          <h2 className="homeSectionTitle">Business Credentials</h2>
+          <p className="homeSectionSubtitle">
+            Factual carrier and operating information for customers evaluating larger moves and freight work.
           </p>
-          <motion.div
-            className="homeTestimonialGrid"
-            {...(reduceMotion ? {} : { initial: "hidden", whileInView: "visible", viewport: { once: true, margin: "-40px" }, variants: staggerParent })}
-          >
-            {testimonials.map((t) => (
-              <motion.article key={t.location} className="homeTestimonialCard card" {...motionCard}>
-                <div className="homeTestimonialQuoteMark" aria-hidden>
-                  “
-                </div>
-                <blockquote className="homeTestimonialQuote">{t.quote}</blockquote>
-                <footer className="homeTestimonialFooter">
-                  <span className="homeTestimonialName">— {t.attribution}</span>
-                  <span className="homeTestimonialLocation">{t.location}</span>
-                </footer>
-              </motion.article>
+          <ul className="homeCredentialsList">
+            {businessCredentials.map((line) => (
+              <li key={line} className="homeCredentialsItem card">
+                {line}
+              </li>
             ))}
-          </motion.div>
-          <p className="homeTestimonialDisclaimer">
-            These testimonials are placeholders and should be replaced with real customer reviews.
-          </p>
+          </ul>
         </div>
       </section>
 
@@ -429,14 +402,14 @@ export default function HomePageClient() {
         </div>
       </motion.section>
 
-      <section className="section sectionLoose homeVisualTrustSection" aria-label="Photos and credentials">
+      <section className="section sectionLoose homeVisualTrustSection" aria-label="Fleet and job photography">
         <div className="container">
           <h2 className="homeSectionTitle">On the road &amp; on the job</h2>
           <p className="homeSectionSubtitle">
-            Real fleet photography, job-site images, and licensing details help customers evaluate fit for larger moves
-            and freight work. Swap placeholders when your assets are ready.
+            Add real fleet and job-site photography when assets are ready—professional visuals reinforce trust for
+            larger residential and commercial jobs.
           </p>
-          <div className="homeVisualTrustGrid">
+          <div className="homeVisualTrustGrid homeVisualTrustGrid--two">
             <div className="homeVisualTrustCard card">
               <div className="homeVisualTrustFrame homeVisualTrustFrame--truck" aria-hidden />
               <h3 className="homeVisualTrustLabel">Truck photo placeholder</h3>
@@ -451,13 +424,6 @@ export default function HomePageClient() {
               <p className="homeVisualTrustHint">
                 Replace with a professional moving or freight job photo: loading, secure strapping, or delivery in
                 progress (with customer permission).
-              </p>
-            </div>
-            <div className="homeVisualTrustCard card">
-              <div className="homeVisualTrustFrame homeVisualTrustFrame--license" aria-hidden />
-              <h3 className="homeVisualTrustLabel">License / DOT info placeholder</h3>
-              <p className="homeVisualTrustHint">
-                Replace with USDOT, MC, or state license numbers and carrier credentials you are authorized to display.
               </p>
             </div>
           </div>
@@ -490,13 +456,13 @@ export default function HomePageClient() {
                   a clear quote and next steps.
                 </p>
                 <p className="homeCtaUrgency">Response within 24 hours · Written estimates available</p>
-                <div className="homeCtaActions homeCtaActions--split">
+                <div className="homeCtaActions homeCtaActions--primary">
                   <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
                     Get a Quote
                   </Link>
-                  <a className="btn btn-secondary btn-lg" href="tel:+14083669696">
-                    Call (408) 366-9696
-                  </a>
+                  <Link href="/contact" prefetch={false} className="homeCtaSecondaryLink">
+                    Contact Us
+                  </Link>
                 </div>
               </div>
               <div className="homeCtaMedia">

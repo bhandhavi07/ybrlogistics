@@ -673,6 +673,25 @@ a {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
+.heroBleedActions--primary {
+  gap: 22px;
+}
+
+.heroBleedSecondaryLink {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 650;
+  font-size: 15px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding-bottom: 3px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.heroBleedSecondaryLink:hover {
+  border-bottom-color: #fff;
+  color: #fff;
+}
+
 /* Homepage trust foundation (hero → services) */
 .homeTrustFoundation {
   background: linear-gradient(180deg, #f4f7fb 0%, #ffffff 42%, #fafbfc 100%);
@@ -855,91 +874,33 @@ a {
   max-width: 44rem;
 }
 
-/* Testimonials */
-.homeTestimonialsSection {
-  background: #fff;
+/* Business credentials */
+.homeCredentialsSection {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 55%, #ffffff 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-.homeTestimonialsSubtitle {
-  margin-bottom: 4px;
-}
-
-.homeTestimonialGrid {
+.homeCredentialsList {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 
-@media (max-width: 900px) {
-  .homeTestimonialGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.homeTestimonialCard {
-  position: relative;
-  padding: 28px 22px 22px;
-  border-radius: 16px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
-  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.homeTestimonialQuoteMark {
-  position: absolute;
-  top: 8px;
-  left: 18px;
-  font-size: 48px;
-  line-height: 1;
-  font-weight: 900;
-  color: rgba(196, 30, 58, 0.22);
-  font-family: Georgia, "Times New Roman", serif;
-  pointer-events: none;
-}
-
-.homeTestimonialQuote {
+.homeCredentialsItem {
   margin: 0;
-  padding-left: 4px;
+  padding: 16px 18px;
   font-size: 15px;
-  line-height: 1.65;
-  font-weight: 650;
+  font-weight: 750;
+  line-height: 1.45;
   color: var(--text);
-  flex: 1;
-}
-
-.homeTestimonialFooter {
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  font-size: 14px;
-}
-
-.homeTestimonialName {
-  font-weight: 800;
-  color: var(--text);
-}
-
-.homeTestimonialLocation {
-  font-weight: 650;
-  color: var(--muted);
-  font-size: 13px;
-  margin-top: 8px;
-}
-
-.homeTestimonialDisclaimer {
-  margin: 20px 0 0;
-  font-size: 13px;
-  line-height: 1.55;
-  font-weight: 600;
-  color: var(--muted);
-  font-style: italic;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
 }
 
 /* Visual trust placeholders (photos / DOT) */
@@ -954,9 +915,21 @@ a {
   margin-top: 8px;
 }
 
+.homeVisualTrustGrid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 900px) {
   .homeVisualTrustGrid {
     grid-template-columns: 1fr;
+  }
+
+  .homeVisualTrustGrid--two {
+    grid-template-columns: 1fr;
+    max-width: none;
   }
 }
 
@@ -987,12 +960,6 @@ a {
   background:
     radial-gradient(circle at 30% 40%, rgba(196, 30, 58, 0.08) 0%, transparent 55%),
     linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 100%);
-}
-
-.homeVisualTrustFrame--license {
-  background:
-    linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%),
-    repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(15, 23, 42, 0.04) 8px, rgba(15, 23, 42, 0.04) 9px);
 }
 
 .homeVisualTrustLabel {
@@ -1346,6 +1313,29 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+}
+
+.homeCtaActions--primary {
+  gap: 22px;
+  align-items: center;
+}
+
+.homeCtaSecondaryLink {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.22);
+  padding-bottom: 3px;
+  line-height: 1.2;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.homeCtaSecondaryLink:hover {
+  color: var(--accent-red);
+  border-bottom-color: var(--accent-red);
 }
 
 .homeCtaMedia {
@@ -1743,9 +1733,11 @@ a {
   }
 
   .heroBleedActions--split,
-  .homeCtaActions--split {
+  .homeCtaActions--split,
+  .heroBleedActions--primary,
+  .homeCtaActions--primary {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
   }
 
   .homePaymentGrid {

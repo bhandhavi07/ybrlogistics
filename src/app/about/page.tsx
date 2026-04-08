@@ -25,14 +25,15 @@ export default function AboutPage() {
     <section className="section">
       <div className="container">
         <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>About YBR Logistics</h1>
-        <p style={{ margin: "14px 0 16px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
+        <p style={{ margin: "14px 0 24px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
           YBR Logistics is a California-based logistics company providing moving, freight transportation, and last-mile
-          delivery services for residential and commercial customers. We focus on reliable scheduling, direct
-          communication, and careful handling so every job is completed professionally and on time.
+          delivery services for residential and commercial customers. We operate with active carrier authority, clear
+          communication, written estimates, and a professional service process designed to keep every job organized from
+          booking to final delivery.
         </p>
         <p style={{ margin: "0 0 24px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
-          Our team supports both state and interstate routes, helping customers move household goods, business
-          equipment, freight, and scheduled deliveries with confidence.
+          Our team supports state and interstate routes, helping customers move household goods, business equipment,
+          freight, and scheduled deliveries with confidence.
         </p>
 
         <div className="card" style={{ padding: 0, overflow: "hidden", marginBottom: 22 }}>
