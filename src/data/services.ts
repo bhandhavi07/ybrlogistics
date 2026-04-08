@@ -29,11 +29,11 @@ export const servicesCatalog: ServiceItem[] = [
     icon: "truckDedicated",
   },
   {
-    title: "Freight Transportation",
-    body: "State and interstate freight support for scheduled lanes, urgent loads, and dedicated transportation needs.",
-    bestFor: "Scheduled lanes, urgent loads, and dedicated freight",
+    title: "Freight Coordination",
+    body: "State and interstate freight coordination for scheduled lanes, urgent loads, and dedicated logistics support.",
+    bestFor: "Scheduled lanes, urgent loads, and coordinated freight moves",
     image: siteImages.services.localFreight,
-    imageAlt: "Freight truck on the road for transportation",
+    imageAlt: "Commercial truck on the road for freight coordination",
     icon: "truck",
   },
   {

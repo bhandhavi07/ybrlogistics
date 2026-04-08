@@ -5,12 +5,8 @@ type ContactPayload = {
   name: string;
   email: string;
   phone: string;
-  pickupAddress: string;
-  deliveryAddress: string;
-  serviceType: string;
-  estimatedSize: string;
-  preferredDate: string;
-  additionalDetails?: string;
+  subject: string;
+  message: string;
 };
 
 function escapeHtml(s: string) {
@@ -67,12 +63,8 @@ export async function POST(req: Request) {
   const name = (payload?.name || "").trim();
   const email = (payload?.email || "").trim();
   const phone = (payload?.phone || "").toString().trim();
-  const pickupAddress = (payload?.pickupAddress || "").trim();
-  const deliveryAddress = (payload?.deliveryAddress || "").trim();
-  const serviceType = (payload?.serviceType || "").trim();
-  const estimatedSize = (payload?.estimatedSize || "").trim();
-  const preferredDate = (payload?.preferredDate || "").trim();
-  const additionalDetails = (payload?.additionalDetails || "").trim();
+  const subject = (payload?.subject || "").trim();
+  const message = (payload?.message || "").trim();
 
   if (!name || name.length < 2 || name.length > 120) {
     return NextResponse.json({ ok: false, error: "Please provide a valid name." }, { status: 400 });
@@ -95,28 +87,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Please provide a valid phone number." }, { status: 400 });
   }
 
-  if (!pickupAddress || pickupAddress.length > 500) {
-    return NextResponse.json({ ok: false, error: "Please provide a pickup address." }, { status: 400 });
+  if (!subject || subject.length < 2 || subject.length > 200) {
+    return NextResponse.json({ ok: false, error: "Please provide a subject." }, { status: 400 });
   }
 
-  if (!deliveryAddress || deliveryAddress.length > 500) {
-    return NextResponse.json({ ok: false, error: "Please provide a delivery address." }, { status: 400 });
+  if (!message || message.length < 10) {
+    return NextResponse.json({ ok: false, error: "Please enter a message (at least 10 characters)." }, { status: 400 });
   }
 
-  if (!serviceType || serviceType.length > 120) {
-    return NextResponse.json({ ok: false, error: "Please select a service type." }, { status: 400 });
-  }
-
-  if (!estimatedSize || estimatedSize.length > 300) {
-    return NextResponse.json({ ok: false, error: "Please describe the estimated move or shipment size." }, { status: 400 });
-  }
-
-  if (!preferredDate || preferredDate.length > 80) {
-    return NextResponse.json({ ok: false, error: "Please provide a preferred date." }, { status: 400 });
-  }
-
-  if (additionalDetails.length > 4000) {
-    return NextResponse.json({ ok: false, error: "Additional details are too long." }, { status: 400 });
+  if (message.length > 4000) {
+    return NextResponse.json({ ok: false, error: "Message is too long." }, { status: 400 });
   }
 
   const SMTP_HOST = env("SMTP_HOST");
@@ -173,35 +153,27 @@ export async function POST(req: Request) {
       })();
 
   const from = `${SMTP_FROM_NAME} <${CONTACT_FROM}>`;
-  const subject = `New request from ${name} — ${serviceType}`;
+  const emailSubject = `Contact inquiry: ${subject} — ${name}`;
 
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
     `Phone: ${phone}`,
-    `Pickup address: ${pickupAddress}`,
-    `Delivery address: ${deliveryAddress}`,
-    `Service type: ${serviceType}`,
-    `Estimated size: ${estimatedSize}`,
-    `Preferred date: ${preferredDate}`,
+    `Subject: ${subject}`,
     "",
-    "Additional details:",
-    additionalDetails || "(none)",
+    "Message:",
+    message,
   ].join("\n");
 
   const html = `
     <div style="font-family: Arial, sans-serif; line-height: 1.5;">
-      <h2 style="margin: 0 0 12px;">${escapeHtml(subject)}</h2>
+      <h2 style="margin: 0 0 12px;">${escapeHtml(emailSubject)}</h2>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-      <p><strong>Pickup address:</strong> ${escapeHtml(pickupAddress)}</p>
-      <p><strong>Delivery address:</strong> ${escapeHtml(deliveryAddress)}</p>
-      <p><strong>Service type:</strong> ${escapeHtml(serviceType)}</p>
-      <p><strong>Estimated move/shipment size:</strong> ${escapeHtml(estimatedSize)}</p>
-      <p><strong>Preferred date:</strong> ${escapeHtml(preferredDate)}</p>
+      <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
       <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
-      <p style="white-space: pre-wrap; margin: 0;"><strong>Additional details:</strong><br/>${escapeHtml(additionalDetails || "(none)")}</p>
+      <p style="white-space: pre-wrap; margin: 0;">${escapeHtml(message)}</p>
     </div>
   `;
 
@@ -209,16 +181,13 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       from,
       to: CONTACT_TO,
-      subject,
+      subject: emailSubject,
       text,
       html,
     });
   } catch (err) {
-    const message = getSendFailureMessage(err as MailError);
-    return NextResponse.json(
-      { ok: false, error: message },
-      { status: 502 }
-    );
+    const messageErr = getSendFailureMessage(err as MailError);
+    return NextResponse.json({ ok: false, error: messageErr }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

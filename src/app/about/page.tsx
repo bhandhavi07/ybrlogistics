@@ -6,18 +6,18 @@ import { siteImages } from "../../data/siteImages";
 export const metadata: Metadata = {
   title: "About YBR Logistics",
   description:
-    "YBR Logistics is a California-based logistics company providing moving, freight transportation, and last-mile delivery for residential and commercial customers.",
+    "YBR Logistics is a California-based moving and logistics service provider for residential and commercial customers.",
   alternates: {
     canonical: "/about",
   },
 };
 
 const values = [
-  "Reliability in scheduling and service",
+  "Reliable scheduling and service",
   "Clear communication from quote to completion",
-  "Careful handling of customer property",
+  "Professional handling",
   "Honest pricing with written estimates",
-  "Professional service on every job",
+  "Customer-focused support",
 ];
 
 export default function AboutPage() {
@@ -26,21 +26,21 @@ export default function AboutPage() {
       <div className="container">
         <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>About YBR Logistics</h1>
         <p style={{ margin: "14px 0 24px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
-          YBR Logistics is a California-based logistics company providing moving, freight transportation, and last-mile
-          delivery services for residential and commercial customers. We operate with active carrier authority, clear
-          communication, written estimates, and a professional service process designed to keep every job organized from
-          booking to final delivery.
+          YBR Logistics is a California-based moving and logistics service provider supporting residential moves,
+          commercial moves, freight coordination, and last-mile delivery. We focus on clear communication, written
+          estimates, professional handling, and dependable scheduling to keep every job organized from booking to final
+          delivery.
         </p>
         <p style={{ margin: "0 0 24px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
-          Our team supports state and interstate routes, helping customers move household goods, business equipment,
-          freight, and scheduled deliveries with confidence.
+          Our team supports state and interstate service needs, helping customers move household goods, business
+          equipment, and scheduled deliveries with confidence.
         </p>
 
         <div className="card" style={{ padding: 0, overflow: "hidden", marginBottom: 22 }}>
           <div className="aboutLeadImage">
             <Image
               src={siteImages.aboutMain}
-              alt="Commercial truck on the road for logistics and moving operations"
+              alt="Commercial truck on the road for moving and logistics"
               fill
               sizes="(max-width: 640px) 100vw, 80vw"
               className="mediaImg mediaCoverBoost"
@@ -51,8 +51,8 @@ export default function AboutPage() {
           <div style={{ padding: 20 }}>
             <div style={{ fontWeight: 950, fontSize: 18 }}>How we work with customers</div>
             <div style={{ color: "var(--muted)", marginTop: 8, fontWeight: 650, lineHeight: 1.7 }}>
-              We align on scope up front, provide written estimates when applicable, and keep dispatch communication
-              active through pickup and delivery—especially important for high-value moves and time-sensitive freight.
+              We align on scope up front, provide written estimates when applicable, and keep communication active
+              through pickup and delivery—especially important for high-value moves and time-sensitive jobs.
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           <div className="aboutGalleryThumb">
             <Image
               src={siteImages.aboutGallery.linehaul}
-              alt="Line-haul trucking on the highway"
+              alt="Highway driving for regional logistics"
               fill
               sizes="(max-width: 900px) 100vw, 33vw"
               className="mediaImg mediaCoverBoost"

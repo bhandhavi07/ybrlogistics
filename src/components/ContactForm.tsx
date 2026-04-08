@@ -3,15 +3,6 @@
 import { useState } from "react";
 import type { CSSProperties, FormEvent } from "react";
 
-const SERVICE_OPTIONS = [
-  "Residential Moving",
-  "Commercial Moving",
-  "Freight Transportation",
-  "Last-Mile Delivery",
-  "Storage and Distribution Support",
-  "Other / Not sure",
-] as const;
-
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -20,12 +11,8 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [pickupAddress, setPickupAddress] = useState("");
-  const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [estimatedSize, setEstimatedSize] = useState("");
-  const [preferredDate, setPreferredDate] = useState("");
-  const [additionalDetails, setAdditionalDetails] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
@@ -45,12 +32,8 @@ export default function ContactForm() {
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
     const trimmedPhone = phone.trim();
-    const trimmedPickup = pickupAddress.trim();
-    const trimmedDelivery = deliveryAddress.trim();
-    const trimmedService = serviceType.trim();
-    const trimmedSize = estimatedSize.trim();
-    const trimmedDate = preferredDate.trim();
-    const trimmedExtra = additionalDetails.trim();
+    const trimmedSubject = subject.trim();
+    const trimmedMessage = message.trim();
 
     if (!trimmedName) return setError("Please enter your full name.");
     if (!trimmedEmail || !isValidEmail(trimmedEmail)) return setError("Please enter a valid email address.");
@@ -60,22 +43,17 @@ export default function ContactForm() {
       return setError("Please enter a valid phone number.");
     }
 
-    if (!trimmedPickup) return setError("Please enter a pickup address.");
-    if (!trimmedDelivery) return setError("Please enter a delivery address.");
-    if (!trimmedService) return setError("Please select a service type.");
-    if (!trimmedSize) return setError("Please describe the estimated move or shipment size.");
-    if (!trimmedDate) return setError("Please choose a preferred date.");
+    if (!trimmedSubject) return setError("Please enter a subject.");
+    if (!trimmedMessage || trimmedMessage.length < 10) {
+      return setError("Please enter a message (at least 10 characters).");
+    }
 
     const payload = {
       name: trimmedName,
       email: trimmedEmail,
       phone: trimmedPhone,
-      pickupAddress: trimmedPickup,
-      deliveryAddress: trimmedDelivery,
-      serviceType: trimmedService,
-      estimatedSize: trimmedSize,
-      preferredDate: trimmedDate,
-      additionalDetails: trimmedExtra,
+      subject: trimmedSubject,
+      message: trimmedMessage,
     };
 
     try {
@@ -93,16 +71,12 @@ export default function ContactForm() {
         return;
       }
 
-      setSuccess("We received your request. We'll contact you within 24 hours with next steps.");
+      setSuccess("We received your message. Our team will get back to you soon.");
       setName("");
       setEmail("");
       setPhone("");
-      setPickupAddress("");
-      setDeliveryAddress("");
-      setServiceType("");
-      setEstimatedSize("");
-      setPreferredDate("");
-      setAdditionalDetails("");
+      setSubject("");
+      setMessage("");
     } catch {
       setError("Network error. Please try again in a moment.");
     } finally {
@@ -165,81 +139,26 @@ export default function ContactForm() {
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Pickup address</label>
+        <label style={{ fontWeight: 800 }}>Subject</label>
         <input
-          value={pickupAddress}
-          onChange={(e) => setPickupAddress(e.target.value)}
-          placeholder="Street, city, state, ZIP"
-          required
-          style={inputStyle}
-          autoComplete="street-address"
-        />
-      </div>
-
-      <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Delivery address</label>
-        <input
-          value={deliveryAddress}
-          onChange={(e) => setDeliveryAddress(e.target.value)}
-          placeholder="Street, city, state, ZIP"
-          required
-          style={inputStyle}
-        />
-      </div>
-
-      <div className="contactLeadFormRow">
-        <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Service type</label>
-          <select
-            value={serviceType}
-            onChange={(e) => setServiceType(e.target.value)}
-            required
-            style={inputStyle}
-          >
-            <option value="">Select a service</option>
-            {SERVICE_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Estimated move or shipment size</label>
-          <input
-            value={estimatedSize}
-            onChange={(e) => setEstimatedSize(e.target.value)}
-            placeholder="e.g. 2-bedroom home, 5 pallets"
-            required
-            style={inputStyle}
-          />
-        </div>
-      </div>
-
-      <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Preferred date</label>
-        <input
-          value={preferredDate}
-          onChange={(e) => setPreferredDate(e.target.value)}
-          type="date"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="What is this regarding?"
           required
           style={inputStyle}
         />
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Additional details</label>
+        <label style={{ fontWeight: 800 }}>Message</label>
         <textarea
-          value={additionalDetails}
-          onChange={(e) => setAdditionalDetails(e.target.value)}
-          placeholder="Access, stairs, parking, special items, timing windows..."
-          style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="How can we help?"
+          required
+          style={{ ...inputStyle, minHeight: 140, resize: "vertical" }}
         />
       </div>
-
-      <p className="contactLeadFormDisclaimer" style={{ margin: 0, fontSize: 13, color: "var(--muted)", lineHeight: 1.6 }}>
-        By submitting this form, you agree to be contacted by YBR Logistics regarding your request.
-      </p>
 
       {error ? (
         <div role="alert" style={{ color: "#b91c1c", fontWeight: 750 }}>
@@ -254,7 +173,7 @@ export default function ContactForm() {
       ) : null}
 
       <button className="btn btn-primary" type="submit" disabled={submitting} style={{ opacity: submitting ? 0.8 : 1 }}>
-        {submitting ? "Sending..." : "Submit request"}
+        {submitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

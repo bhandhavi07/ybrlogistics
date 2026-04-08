@@ -30,18 +30,20 @@ const trustFoundationItems: {
   sub?: string;
   icon: "shield" | "map" | "route" | "document" | "payment" | "contact";
 }[] = [
-  { label: "Licensed & Insured", icon: "shield" },
+  { label: "Licensed & Insured Service Provider", icon: "shield" },
   { label: "California-Based Operations", icon: "map" },
-  { label: "State and Interstate Routes", icon: "route" },
+  { label: "State and Interstate Service Support", icon: "route" },
   { label: "Written Estimates", icon: "document" },
   { label: "Clear Booking and Payment Process", icon: "payment" },
   { label: "Direct Support by Phone and Email", icon: "contact" },
 ];
 
 const businessCredentials = [
-  "Active carrier authority",
-  "Licensed & insured",
+  "Licensed & insured service provider",
   "California-based operations",
+  "Residential and commercial support",
+  "Freight coordination and last-mile delivery",
+  "Written estimates and clear payment process",
 ];
 
 function TrustFoundationIcon({ id }: { id: (typeof trustFoundationItems)[number]["icon"] }) {
@@ -127,7 +129,7 @@ const whyChooseBullets: { text: string; icon: "route" | "clock" | "package" | "c
   { text: "On-time pickup and delivery coordination", icon: "route" },
   { text: "Responsive dispatch communication", icon: "chat" },
   { text: "Residential and commercial moving support", icon: "package" },
-  { text: "Freight and last-mile delivery coverage", icon: "clock" },
+  { text: "Freight coordination and last-mile delivery support", icon: "clock" },
   { text: "Careful handling for high-value and time-sensitive jobs", icon: "package" },
 ];
 
@@ -146,7 +148,7 @@ const faqItems = [
   },
   {
     q: "Do you handle both moving and freight jobs?",
-    a: "Yes. We support residential moving, commercial moving, freight transportation, and last-mile delivery.",
+    a: "Yes. We support residential moving, commercial moving, freight coordination, and last-mile delivery.",
   },
 ];
 
@@ -165,7 +167,7 @@ export default function HomePageClient() {
         <div className="heroBleedMedia" aria-hidden>
           <Image
             src={siteImages.heroBanner}
-            alt="Commercial freight and moving operations"
+            alt="Commercial moving and logistics operations"
             fill
             priority
             sizes="100vw"
@@ -182,8 +184,9 @@ export default function HomePageClient() {
               Reliable Moving, Freight, and Last-Mile Delivery Across California and Interstate Routes
             </h1>
             <p className="reveal revealDelay2 heroBleedLead">
-              YBR Logistics provides residential moving, commercial moving, freight transportation, and last-mile delivery
-              with clear scheduling, responsive communication, and careful handling from pickup to final delivery.
+              YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery
+              support with clear scheduling, responsive communication, and careful handling from booking to final
+              delivery.
             </p>
             <div className="reveal revealDelay2 heroBleedActions heroBleedActions--primary">
               <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
@@ -198,15 +201,15 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <section className="homeTrustFoundation section sectionLoose" aria-label="Licensed and insured trust">
+      <section className="homeTrustFoundation section sectionLoose" aria-label="Trusted moving and logistics support">
         <div className="container">
           <div className="homeTrustFoundationHeader">
             <span className="homeTrustFoundationEyebrow">Licensed &amp; insured</span>
             <h2 className="homeTrustFoundationTitle">Trusted Moving, Freight, and Logistics Support</h2>
             <p className="homeTrustFoundationIntro">
-              YBR Logistics provides reliable residential moving, commercial moving, freight transportation, and last-mile
-              delivery with clear communication, written estimates, and professional handling from pickup to final
-              delivery.
+              YBR Logistics provides reliable residential moving, commercial moving, freight coordination, and last-mile
+              delivery support with clear communication, written estimates, and professional handling from booking to
+              final delivery.
             </p>
           </div>
 
@@ -252,8 +255,8 @@ export default function HomePageClient() {
           </div>
 
           <p className="homeTrustFootnote">
-            Service availability depends on route, scheduling, and shipment details. Contact us for current availability
-            and quote requests.
+            We coordinate moving, delivery, and logistics services based on the specific needs of each job. Contact us for
+            availability and quote requests.
           </p>
         </div>
       </section>
@@ -311,7 +314,7 @@ export default function HomePageClient() {
         <div className="container">
           <h2 className="homeSectionTitle">Business Credentials</h2>
           <p className="homeSectionSubtitle">
-            Factual carrier and operating information for customers evaluating larger moves and freight work.
+            How we support customers planning larger moves, deliveries, and logistics projects.
           </p>
           <ul className="homeCredentialsList">
             {businessCredentials.map((line) => (
@@ -382,7 +385,7 @@ export default function HomePageClient() {
             <div className="homeIntroCardImageWrap">
               <Image
                 src={siteImages.heroCard}
-                alt="Professional trucking and logistics"
+                alt="Professional logistics and moving services"
                 fill
                 sizes="(max-width: 900px) 100vw, 40vw"
                 className="homeIntroCardImg"
@@ -411,16 +414,16 @@ export default function HomePageClient() {
               <div className="homeVisualTrustImageWrap">
                 <Image
                   src={siteImages.homeOnTheRoad.fleet}
-                  alt="Semi truck on the road for regional and line-haul freight"
+                  alt="Commercial truck on the road for long-distance logistics"
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 460px"
                   className="homeVisualTrustImg mediaCoverBoost"
                   style={{ objectFit: "cover" }}
                 />
               </div>
-              <h3 className="homeVisualTrustLabel">Line-haul &amp; fleet</h3>
+              <h3 className="homeVisualTrustLabel">On the road &amp; fleet</h3>
               <p className="homeVisualTrustHint">
-                Equipment and routing built for dependable state and interstate pickups and deliveries.
+                Coverage and scheduling support for dependable state and interstate pickups and deliveries.
               </p>
             </div>
             <div className="homeVisualTrustCard card">

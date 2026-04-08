@@ -51,7 +51,7 @@ export default function Footer() {
               </a>
             </p>
             <p className="siteFooterSupport">
-              Licensed and insured logistics support for moving, freight, and last-mile delivery.
+              Licensed and insured service provider for moving, freight coordination, and last-mile delivery.
             </p>
             <div className="siteFooterSocial" aria-label="Social">
               <a

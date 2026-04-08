@@ -7,10 +7,20 @@ type QuotePayload = {
   phone: string;
   pickup_location: string;
   delivery_location: string;
+  service_type: string;
+  estimated_size: string;
   preferred_date: string;
-  message: string;
+  additional_details?: string;
   website?: string;
 };
+
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
@@ -100,11 +110,12 @@ export async function POST(req: Request) {
   const phone = (payload?.phone || "").toString().trim();
   const pickupLocation = (payload?.pickup_location || "").trim();
   const deliveryLocation = (payload?.delivery_location || "").trim();
+  const serviceType = (payload?.service_type || "").trim();
+  const estimatedSize = (payload?.estimated_size || "").trim();
   const preferredDate = (payload?.preferred_date || "").trim();
-  const message = (payload?.message || "").trim();
+  const additionalDetails = (payload?.additional_details || "").trim();
   const website = (payload?.website || "").trim();
 
-  // Honeypot: most bots fill hidden fields, so short-circuit and pretend success.
   if (website) {
     return NextResponse.json({ ok: true });
   }
@@ -130,24 +141,28 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Please provide a valid phone number." }, { status: 400 });
   }
 
-  if (!pickupLocation || pickupLocation.length < 2 || pickupLocation.length > 220) {
-    return NextResponse.json({ ok: false, error: "Please provide a valid pickup location." }, { status: 400 });
+  if (!pickupLocation || pickupLocation.length > 500) {
+    return NextResponse.json({ ok: false, error: "Please provide a pickup address." }, { status: 400 });
   }
 
-  if (!deliveryLocation || deliveryLocation.length < 2 || deliveryLocation.length > 220) {
-    return NextResponse.json({ ok: false, error: "Please provide a valid delivery location." }, { status: 400 });
+  if (!deliveryLocation || deliveryLocation.length > 500) {
+    return NextResponse.json({ ok: false, error: "Please provide a delivery address." }, { status: 400 });
   }
 
-  if (!preferredDate || preferredDate.length > 40) {
-    return NextResponse.json({ ok: false, error: "Please provide a valid preferred date." }, { status: 400 });
+  if (!serviceType || serviceType.length > 120) {
+    return NextResponse.json({ ok: false, error: "Please select a service type." }, { status: 400 });
   }
 
-  if (!message || message.length < 10) {
-    return NextResponse.json({ ok: false, error: "Please provide a message (at least 10 characters)." }, { status: 400 });
+  if (!estimatedSize || estimatedSize.length > 300) {
+    return NextResponse.json({ ok: false, error: "Please describe the estimated move or shipment size." }, { status: 400 });
   }
 
-  if (message.length > 2000) {
-    return NextResponse.json({ ok: false, error: "Message is too long." }, { status: 400 });
+  if (!preferredDate || preferredDate.length > 80) {
+    return NextResponse.json({ ok: false, error: "Please provide a preferred date." }, { status: 400 });
+  }
+
+  if (additionalDetails.length > 4000) {
+    return NextResponse.json({ ok: false, error: "Additional details are too long." }, { status: 400 });
   }
 
   const SMTP_HOST = env("SMTP_HOST");
@@ -204,31 +219,35 @@ export async function POST(req: Request) {
       })();
 
   const from = `${SMTP_FROM_NAME} <${CONTACT_FROM}>`;
-  const subject = "New shipment quote request";
+  const subject = `Quote request from ${name} — ${serviceType}`;
 
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
     `Phone: ${phone}`,
-    `Pickup Location: ${pickupLocation}`,
-    `Delivery Location: ${deliveryLocation}`,
-    `Preferred Date: ${preferredDate}`,
+    `Pickup address: ${pickupLocation}`,
+    `Delivery address: ${deliveryLocation}`,
+    `Service type: ${serviceType}`,
+    `Estimated size: ${estimatedSize}`,
+    `Preferred date: ${preferredDate}`,
     "",
-    "Message:",
-    message || "N/A",
+    "Additional details:",
+    additionalDetails || "(none)",
   ].join("\n");
 
   const html = `
     <div style="font-family: Arial, sans-serif; line-height: 1.5;">
-      <h2 style="margin: 0 0 12px;">${subject}</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Pickup Location:</strong> ${pickupLocation}</p>
-      <p><strong>Delivery Location:</strong> ${deliveryLocation}</p>
-      <p><strong>Preferred Date:</strong> ${preferredDate}</p>
+      <h2 style="margin: 0 0 12px;">${escapeHtml(subject)}</h2>
+      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
+      <p><strong>Pickup address:</strong> ${escapeHtml(pickupLocation)}</p>
+      <p><strong>Delivery address:</strong> ${escapeHtml(deliveryLocation)}</p>
+      <p><strong>Service type:</strong> ${escapeHtml(serviceType)}</p>
+      <p><strong>Estimated move/shipment size:</strong> ${escapeHtml(estimatedSize)}</p>
+      <p><strong>Preferred date:</strong> ${escapeHtml(preferredDate)}</p>
       <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
-      <p style="white-space: pre-wrap; margin: 0;">${message || "N/A"}</p>
+      <p style="white-space: pre-wrap; margin: 0;"><strong>Additional details:</strong><br/>${escapeHtml(additionalDetails || "(none)")}</p>
     </div>
   `;
 
@@ -242,12 +261,8 @@ export async function POST(req: Request) {
     });
   } catch (err) {
     const message = getSendFailureMessage(err as MailError);
-    return NextResponse.json(
-      { ok: false, error: message },
-      { status: 502 }
-    );
+    return NextResponse.json({ ok: false, error: message }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });
 }
-

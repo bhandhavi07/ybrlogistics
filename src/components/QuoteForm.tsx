@@ -3,16 +3,14 @@
 import { useState } from "react";
 import type { CSSProperties, FormEvent } from "react";
 
-type QuotePayload = {
-  name: string;
-  email: string;
-  phone: string;
-  pickup_location: string;
-  delivery_location: string;
-  preferred_date: string;
-  message: string;
-  website?: string;
-};
+const SERVICE_OPTIONS = [
+  "Residential Moving",
+  "Commercial Moving",
+  "Freight Coordination",
+  "Last-Mile Delivery",
+  "Storage and Distribution Support",
+  "Other / Not sure",
+] as const;
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -20,12 +18,14 @@ function isValidEmail(email: string) {
 
 export default function QuoteForm() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [pickupLocation, setPickupLocation] = useState("");
   const [deliveryLocation, setDeliveryLocation] = useState("");
+  const [serviceType, setServiceType] = useState("");
+  const [estimatedSize, setEstimatedSize] = useState("");
   const [preferredDate, setPreferredDate] = useState("");
-  const [message, setMessage] = useState("");
+  const [additionalDetails, setAdditionalDetails] = useState("");
   const [website, setWebsite] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
@@ -38,34 +38,43 @@ export default function QuoteForm() {
     setSuccess(null);
 
     const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
     const trimmedPhone = phone.trim();
-    const trimmedPickupLocation = pickupLocation.trim();
-    const trimmedDeliveryLocation = deliveryLocation.trim();
-    const trimmedPreferredDate = preferredDate.trim();
-    const trimmedMessage = message.trim();
+    const trimmedEmail = email.trim();
+    const trimmedPickup = pickupLocation.trim();
+    const trimmedDelivery = deliveryLocation.trim();
+    const trimmedService = serviceType.trim();
+    const trimmedSize = estimatedSize.trim();
+    const trimmedDate = preferredDate.trim();
+    const trimmedExtra = additionalDetails.trim();
     const trimmedWebsite = website.trim();
 
-    if (!trimmedName) return setError("Please enter your name.");
-    if (!trimmedEmail || !isValidEmail(trimmedEmail)) return setError("Please enter a valid email address.");
+    if (trimmedWebsite) {
+      setSuccess("Thanks! We received your request.");
+      return;
+    }
+
+    if (!trimmedName) return setError("Please enter your full name.");
     if (!trimmedPhone) return setError("Please enter your phone number.");
     const digits = trimmedPhone.replace(/\D/g, "");
     if (!digits || digits.length < 7 || digits.length > 15) return setError("Please enter a valid phone number.");
-    if (!trimmedPickupLocation) return setError("Please enter the pickup location.");
-    if (!trimmedDeliveryLocation) return setError("Please enter the delivery location.");
-    if (!trimmedPreferredDate) return setError("Please select preferred date.");
-    if (!trimmedMessage || trimmedMessage.length < 10) return setError("Please enter a message (at least 10 characters).");
-    if (trimmedMessage.length > 2000) return setError("Message is too long.");
+    if (!trimmedEmail || !isValidEmail(trimmedEmail)) return setError("Please enter a valid email address.");
+    if (!trimmedPickup) return setError("Please enter the pickup address.");
+    if (!trimmedDelivery) return setError("Please enter the delivery address.");
+    if (!trimmedService) return setError("Please select a service type.");
+    if (!trimmedSize) return setError("Please describe the estimated move or shipment size.");
+    if (!trimmedDate) return setError("Please choose a preferred date.");
+    if (trimmedExtra.length > 4000) return setError("Additional details are too long.");
 
-    const payload: QuotePayload = {
+    const payload = {
       name: trimmedName,
       email: trimmedEmail,
       phone: trimmedPhone,
-      pickup_location: trimmedPickupLocation,
-      delivery_location: trimmedDeliveryLocation,
-      preferred_date: trimmedPreferredDate,
-      message: trimmedMessage,
-      website: trimmedWebsite,
+      pickup_location: trimmedPickup,
+      delivery_location: trimmedDelivery,
+      service_type: trimmedService,
+      estimated_size: trimmedSize,
+      preferred_date: trimmedDate,
+      additional_details: trimmedExtra || undefined,
     };
 
     try {
@@ -83,15 +92,16 @@ export default function QuoteForm() {
         return;
       }
 
-      setSuccess("Thanks! We received your request and will contact you within 24 hours.");
+      setSuccess("Thanks! We received your quote request and will contact you within 24 hours with next steps.");
       setName("");
-      setEmail("");
       setPhone("");
+      setEmail("");
       setPickupLocation("");
       setDeliveryLocation("");
+      setServiceType("");
+      setEstimatedSize("");
       setPreferredDate("");
-      setMessage("");
-      setWebsite("");
+      setAdditionalDetails("");
     } catch {
       setError("Network error. Please try again in a moment.");
     } finally {
@@ -100,20 +110,35 @@ export default function QuoteForm() {
   };
 
   return (
-    <form id="quote-form" onSubmit={onSubmit} style={{ display: "grid", gap: 12 }}>
-      <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Name</label>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your full name"
-          required
-          style={inputStyle}
-        />
+    <form id="quote-form" onSubmit={onSubmit} style={{ display: "grid", gap: 12, position: "relative" }}>
+      <div className="contactLeadFormRow">
+        <div style={{ display: "grid", gap: 6 }}>
+          <label style={{ fontWeight: 800 }}>Full name</label>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your full name"
+            required
+            style={inputStyle}
+            autoComplete="name"
+          />
+        </div>
+        <div style={{ display: "grid", gap: 6 }}>
+          <label style={{ fontWeight: 800 }}>Phone number</label>
+          <input
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="(408) 366-9696"
+            required
+            type="tel"
+            style={inputStyle}
+            autoComplete="tel"
+          />
+        </div>
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Email</label>
+        <label style={{ fontWeight: 800 }}>Email address</label>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -121,67 +146,78 @@ export default function QuoteForm() {
           required
           type="email"
           style={inputStyle}
+          autoComplete="email"
         />
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Phone</label>
-        <input
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="(408) 123-4567"
-          required
-          type="tel"
-          style={inputStyle}
-        />
-      </div>
-
-      <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Pickup Location</label>
+        <label style={{ fontWeight: 800 }}>Pickup address</label>
         <input
           value={pickupLocation}
           onChange={(e) => setPickupLocation(e.target.value)}
-          placeholder="City or full pickup address"
+          placeholder="Street, city, state, ZIP"
           required
           style={inputStyle}
         />
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Delivery Location</label>
+        <label style={{ fontWeight: 800 }}>Delivery address</label>
         <input
           value={deliveryLocation}
           onChange={(e) => setDeliveryLocation(e.target.value)}
-          placeholder="City or full delivery address"
+          placeholder="Street, city, state, ZIP"
           required
           style={inputStyle}
         />
       </div>
 
+      <div className="contactLeadFormRow">
+        <div style={{ display: "grid", gap: 6 }}>
+          <label style={{ fontWeight: 800 }}>Service type</label>
+          <select
+            value={serviceType}
+            onChange={(e) => setServiceType(e.target.value)}
+            required
+            style={inputStyle}
+          >
+            <option value="">Select a service</option>
+            {SERVICE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div style={{ display: "grid", gap: 6 }}>
+          <label style={{ fontWeight: 800 }}>Estimated move or shipment size</label>
+          <input
+            value={estimatedSize}
+            onChange={(e) => setEstimatedSize(e.target.value)}
+            placeholder="e.g. 2-bedroom home, 5 pallets"
+            required
+            style={inputStyle}
+          />
+        </div>
+      </div>
+
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Preferred Date</label>
+        <label style={{ fontWeight: 800 }}>Preferred date</label>
         <input
           value={preferredDate}
-          onChange={(e) => {
-            setPreferredDate(e.target.value);
-            const el = e.currentTarget;
-            setTimeout(() => {
-              el.blur();
-            }, 0);
-          }}
-          required
+          onChange={(e) => setPreferredDate(e.target.value)}
           type="date"
+          required
           style={inputStyle}
         />
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Message</label>
+        <label style={{ fontWeight: 800 }}>Additional details</label>
         <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Tell us shipment size, handling notes, or special requirements."
-          required
+          value={additionalDetails}
+          onChange={(e) => setAdditionalDetails(e.target.value)}
+          placeholder="Access, stairs, parking, special items, timing windows (optional)"
           style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
         />
       </div>
@@ -190,9 +226,9 @@ export default function QuoteForm() {
         style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}
         aria-hidden="true"
       >
-        <label htmlFor="website">Website</label>
+        <label htmlFor="quote-website">Website</label>
         <input
-          id="website"
+          id="quote-website"
           name="website"
           type="text"
           value={website}
@@ -229,4 +265,3 @@ const inputStyle: CSSProperties = {
   fontSize: 14,
   background: "white",
 };
-
