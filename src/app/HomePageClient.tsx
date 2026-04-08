@@ -25,13 +25,118 @@ const staggerItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOut } },
 };
 
-const trustPills = [
-  "Licensed and insured",
-  "California-based operations",
-  "State and interstate service",
-  "Residential, commercial, and freight support",
-  "Quotes with clear next steps",
+const trustFoundationItems: {
+  label: string;
+  sub?: string;
+  icon: "shield" | "map" | "route" | "document" | "payment" | "contact";
+}[] = [
+  { label: "Licensed & Insured", icon: "shield" },
+  { label: "California-Based Operations", icon: "map" },
+  { label: "State and Interstate Routes", icon: "route" },
+  { label: "Written Estimates", icon: "document" },
+  { label: "Clear Booking and Payment Process", icon: "payment" },
+  { label: "Direct Phone and Email Support", icon: "contact" },
 ];
+
+const testimonials = [
+  {
+    quote:
+      "Professional, responsive, and easy to work with from start to finish. The team communicated clearly and handled the move carefully.",
+    attribution: "Placeholder Customer",
+    location: "San Jose, CA",
+  },
+  {
+    quote:
+      "Great experience with scheduling, pickup, and delivery. Everything was explained clearly, including pricing and timing.",
+    attribution: "Placeholder Customer",
+    location: "Fremont, CA",
+  },
+  {
+    quote:
+      "Reliable service and good communication throughout the job. I appreciated the written estimate and organized process.",
+    attribution: "Placeholder Customer",
+    location: "Hayward, CA",
+  },
+];
+
+function TrustFoundationIcon({ id }: { id: (typeof trustFoundationItems)[number]["icon"] }) {
+  const stroke = "currentColor";
+  const common = { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none" as const, "aria-hidden": true as const };
+  switch (id) {
+    case "shield":
+      return (
+        <svg {...common}>
+          <path
+            d="M12 3l7 3v6c0 4.5-3.2 8.2-7 9-3.8-.8-7-4.5-7-9V6l7-3z"
+            stroke={stroke}
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+          />
+          <path d="M9.5 12.5l1.7 1.7 3.8-4.2" stroke={stroke} strokeWidth="1.75" strokeLinecap="round" />
+        </svg>
+      );
+    case "map":
+      return (
+        <svg {...common}>
+          <path
+            d="M9 4.5L3 6.5v12l6-2 6 2 6-2v-12l-6 2-6-2z"
+            stroke={stroke}
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+          />
+          <circle cx="12" cy="10" r="1.6" fill={stroke} />
+        </svg>
+      );
+    case "route":
+      return (
+        <svg {...common}>
+          <path
+            d="M4 17h4l2-6 4 6h6"
+            stroke={stroke}
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx="7" cy="17" r="2" stroke={stroke} strokeWidth="1.75" />
+          <circle cx="17" cy="17" r="2" stroke={stroke} strokeWidth="1.75" />
+        </svg>
+      );
+    case "document":
+      return (
+        <svg {...common}>
+          <path
+            d="M8 3h6l4 4v14a1 1 0 01-1 1H8a2 2 0 01-2-2V5a2 2 0 012-2z"
+            stroke={stroke}
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+          />
+          <path d="M14 3v4h4M9 12h6M9 16h6" stroke={stroke} strokeWidth="1.75" strokeLinecap="round" />
+        </svg>
+      );
+    case "payment":
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="14" rx="2" stroke={stroke} strokeWidth="1.75" />
+          <path d="M3 10h18" stroke={stroke} strokeWidth="1.75" />
+          <path d="M7 15h4" stroke={stroke} strokeWidth="1.75" strokeLinecap="round" />
+        </svg>
+      );
+    case "contact":
+      return (
+        <svg {...common}>
+          <path
+            d="M5 5h14v10H8l-3 3V5z"
+            stroke={stroke}
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+          />
+          <path d="M9 9h6M9 12h3" stroke={stroke} strokeWidth="1.75" strokeLinecap="round" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 const whyChooseBullets: { text: string; icon: "route" | "clock" | "package" | "chat" }[] = [
   { text: "On-time pickup and delivery coordination", icon: "route" },
@@ -108,40 +213,64 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <section className="homeTrustBadges" aria-label="Trust highlights">
+      <section className="homeTrustFoundation section sectionLoose" aria-label="Licensed and insured trust">
         <div className="container">
-          <ul className="homeTrustBadgesList">
-            {trustPills.map((label) => (
-              <li key={label} className="homeTrustBadge">
-                {label}
-              </li>
+          <div className="homeTrustFoundationHeader">
+            <span className="homeTrustFoundationEyebrow">Licensed &amp; insured</span>
+            <h2 className="homeTrustFoundationTitle">
+              Trusted Logistics Support for Residential, Commercial, and Freight Jobs
+            </h2>
+            <p className="homeTrustFoundationIntro">
+              YBR Logistics provides reliable moving, freight, and last-mile delivery support with clear communication,
+              written estimates, and professional handling from pickup to final delivery.
+            </p>
+          </div>
+
+          <div className="homeTrustTileGrid">
+            {trustFoundationItems.map((item) => (
+              <div key={item.label} className="homeTrustTile card">
+                <div className="homeTrustTileIconWrap" aria-hidden>
+                  <TrustFoundationIcon id={item.icon} />
+                </div>
+                <div className="homeTrustTileBody">
+                  <div className="homeTrustTileLabel">{item.label}</div>
+                  {item.icon === "contact" ? (
+                    <div className="homeTrustTileContact">
+                      <a href="tel:+14083669696" className="homeTrustTileLink">
+                        (408) 366-9696
+                      </a>
+                      <span className="homeTrustTileSep" aria-hidden>
+                        ·
+                      </span>
+                      <a href="mailto:Sandeep@ybrlogistics.com" className="homeTrustTileLink">
+                        Sandeep@ybrlogistics.com
+                      </a>
+                    </div>
+                  ) : item.sub ? (
+                    <p className="homeTrustTileSub">{item.sub}</p>
+                  ) : null}
+                </div>
+              </div>
             ))}
-          </ul>
-        </div>
-      </section>
+          </div>
 
-      <section className="homeTrustStrip" aria-label="Operations">
-        <div className="container homeTrustStripInner">
-          <span>Written estimates &amp; clear scheduling</span>
-          <span>High-value &amp; time-sensitive job experience</span>
-          <span>Direct communication from quote to delivery</span>
-        </div>
-      </section>
-
-      <section className="section sectionLoose homeLicensedBanner" aria-label="Licensed operations">
-        <div className="container">
-          <div className="homeLicensedBannerInner card">
-            <div className="homeLicensedBannerIcon" aria-hidden>
-              ✓
+          <div className="homeTrustCallout card">
+            <div className="homeTrustCalloutIcon" aria-hidden>
+              <TrustFoundationIcon id="payment" />
             </div>
-            <div>
-              <div className="homeLicensedBannerTitle">Licensed &amp; insured logistics</div>
-              <p className="homeLicensedBannerText">
-                Moving, freight, and last-mile delivery with documentation and professional standards customers and
-                partners expect for larger jobs.
+            <div className="homeTrustCalloutBody">
+              <div className="homeTrustCalloutTitle">Payment-safe booking</div>
+              <p className="homeTrustCalloutText">
+                Deposit required to confirm booking. Remaining balance due upon unloading or service completion. Any
+                additional charges are discussed and approved before being added.
               </p>
             </div>
           </div>
+
+          <p className="homeTrustFootnote">
+            Service availability depends on route, scheduling, and shipment details. Contact us for current availability
+            and quote requests.
+          </p>
         </div>
       </section>
 
@@ -194,6 +323,35 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      <section className="section sectionLoose homeTestimonialsSection" aria-label="Customer testimonials">
+        <div className="container">
+          <h2 className="homeSectionTitle">What Customers Say</h2>
+          <p className="homeSectionSubtitle homeTestimonialsSubtitle">
+            Residential, commercial, and freight customers value clear communication and careful handling on every job.
+          </p>
+          <motion.div
+            className="homeTestimonialGrid"
+            {...(reduceMotion ? {} : { initial: "hidden", whileInView: "visible", viewport: { once: true, margin: "-40px" }, variants: staggerParent })}
+          >
+            {testimonials.map((t) => (
+              <motion.article key={t.location} className="homeTestimonialCard card" {...motionCard}>
+                <div className="homeTestimonialQuoteMark" aria-hidden>
+                  “
+                </div>
+                <blockquote className="homeTestimonialQuote">{t.quote}</blockquote>
+                <footer className="homeTestimonialFooter">
+                  <span className="homeTestimonialName">— {t.attribution}</span>
+                  <span className="homeTestimonialLocation">{t.location}</span>
+                </footer>
+              </motion.article>
+            ))}
+          </motion.div>
+          <p className="homeTestimonialDisclaimer">
+            These testimonials are placeholders and should be replaced with real customer reviews.
+          </p>
+        </div>
+      </section>
+
       <section className="section sectionLoose homePaymentSection" aria-label="Payment process">
         <div className="container">
           <div className="homePaymentGrid">
@@ -232,7 +390,7 @@ export default function HomePageClient() {
       <motion.section className="section sectionLoose" {...motionIntro}>
         <div className="container homeIntroGrid">
           <div className="homeIntroCopy">
-            <h2 className="homeSectionTitle">Why customers choose YBR Logistics</h2>
+            <h2 className="homeSectionTitle">Why Customers Choose YBR Logistics</h2>
             <p className="homeIntroLead">
               Straightforward scheduling, responsive updates, and careful handling — especially important when jobs
               involve significant value and tight timelines.
@@ -271,21 +429,35 @@ export default function HomePageClient() {
         </div>
       </motion.section>
 
-      <section className="section sectionLoose homePlaceholderSection" aria-label="Social proof">
+      <section className="section sectionLoose homeVisualTrustSection" aria-label="Photos and credentials">
         <div className="container">
-          <div className="homePlaceholderGrid">
-            <div className="homePlaceholderCard card">
-              <h3 className="homePlaceholderTitle">Customer testimonials</h3>
-              <p className="homePlaceholderText">
-                We&apos;re collecting reviews from recent moves and freight jobs. Check back soon, or ask us for
-                references when you request a quote.
+          <h2 className="homeSectionTitle">On the road &amp; on the job</h2>
+          <p className="homeSectionSubtitle">
+            Real fleet photography, job-site images, and licensing details help customers evaluate fit for larger moves
+            and freight work. Swap placeholders when your assets are ready.
+          </p>
+          <div className="homeVisualTrustGrid">
+            <div className="homeVisualTrustCard card">
+              <div className="homeVisualTrustFrame homeVisualTrustFrame--truck" aria-hidden />
+              <h3 className="homeVisualTrustLabel">Truck photo placeholder</h3>
+              <p className="homeVisualTrustHint">
+                Replace with a high-quality image of your truck or fleet branding. Recommended: wide shot, good lighting,
+                readable company markings.
               </p>
             </div>
-            <div className="homePlaceholderCard card homePlaceholderCard--photo">
-              <h3 className="homePlaceholderTitle">On the job</h3>
-              <p className="homePlaceholderText">
-                Placeholder for real truck and job-site photography. Replace with your fleet and crew photos when
-                ready.
+            <div className="homeVisualTrustCard card">
+              <div className="homeVisualTrustFrame homeVisualTrustFrame--job" aria-hidden />
+              <h3 className="homeVisualTrustLabel">Job photo placeholder</h3>
+              <p className="homeVisualTrustHint">
+                Replace with a professional moving or freight job photo: loading, secure strapping, or delivery in
+                progress (with customer permission).
+              </p>
+            </div>
+            <div className="homeVisualTrustCard card">
+              <div className="homeVisualTrustFrame homeVisualTrustFrame--license" aria-hidden />
+              <h3 className="homeVisualTrustLabel">License / DOT info placeholder</h3>
+              <p className="homeVisualTrustHint">
+                Replace with USDOT, MC, or state license numbers and carrier credentials you are authorized to display.
               </p>
             </div>
           </div>
