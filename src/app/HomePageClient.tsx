@@ -40,8 +40,6 @@ const trustFoundationItems: {
 
 const businessCredentials = [
   "Active carrier authority",
-  "USDOT: 3252374",
-  "MC: 1092818",
   "Licensed & insured",
   "California-based operations",
 ];
