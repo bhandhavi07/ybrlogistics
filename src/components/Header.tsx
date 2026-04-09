@@ -100,7 +100,7 @@ export default function Header() {
         </nav>
       </div>
       <div className="siteServiceAreaBar" role="note" aria-label="Service area">
-        California &amp; interstate — moving, freight &amp; last-mile delivery
+        California-based operations — moving, freight coordination &amp; last-mile delivery
       </div>
     </header>
   );

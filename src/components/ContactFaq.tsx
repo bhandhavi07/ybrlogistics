@@ -1,19 +1,23 @@
 const contactFaqItems: { q: string; a: string }[] = [
   {
     q: "Do you require a deposit?",
-    a: "Yes. A deposit is required to confirm booking.",
+    a: "Yes. A deposit may be required to confirm your booking and secure your service date.",
   },
   {
-    q: "When is balance due?",
-    a: "Upon completion or unloading unless stated otherwise.",
+    q: "When is the remaining balance due?",
+    a: "The remaining balance is typically due upon unloading or completion of service unless other written terms apply.",
   },
   {
     q: "Do you discuss extra charges first?",
-    a: "Yes. All additional charges are discussed before being added.",
+    a: "Yes. Any additional work or charges outside the original estimate are discussed and approved before being added.",
   },
   {
     q: "What services do you provide?",
-    a: "Residential, commercial, freight coordination, and last-mile delivery.",
+    a: "We support residential moving, commercial moving, freight coordination, and last-mile delivery services.",
+  },
+  {
+    q: "How do I get an accurate quote?",
+    a: "Use the Get a Quote form with your pickup and delivery details, service type, and timing. We respond with a clear estimate when we have enough information.",
   },
 ];
 

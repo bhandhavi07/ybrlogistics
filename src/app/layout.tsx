@@ -24,7 +24,7 @@ const localBusinessJsonLd = {
     postalCode: "94545",
     addressCountry: "US",
   },
-  areaServed: ["California", "State and interstate routes"],
+  areaServed: ["California", "Broader service support beyond California where available"],
   description:
     "Residential and commercial moving, freight coordination, and last-mile delivery with written estimates and professional service.",
 };
@@ -36,11 +36,11 @@ export const metadata: Metadata = {
     template: "%s | YBR Logistics",
   },
   description:
-    "YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery across California and interstate routes.",
+    "YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery with California-based operations and broader service support.",
   openGraph: {
     title: "YBR Logistics | Moving, Freight & Last-Mile Delivery in California",
     description:
-      "YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery across California and interstate routes.",
+      "YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery with California-based operations and broader service support.",
     url: siteUrl,
     siteName: "YBR Logistics",
     locale: "en_US",

@@ -128,7 +128,7 @@ export default function QuoteForm() {
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="(408) 366-9696"
+            placeholder="(123) 456-7890"
             required
             type="tel"
             style={inputStyle}

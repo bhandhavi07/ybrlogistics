@@ -30,7 +30,7 @@ export const servicesCatalog: ServiceItem[] = [
   },
   {
     title: "Freight Coordination",
-    body: "State and interstate freight coordination for scheduled lanes, urgent loads, and dedicated logistics support.",
+    body: "Freight coordination for scheduled lanes, urgent loads, and dedicated logistics support.",
     bestFor: "Scheduled lanes, urgent loads, and coordinated freight moves",
     image: siteImages.services.localFreight,
     imageAlt: "Commercial truck on the road for freight coordination",

@@ -130,7 +130,7 @@ export default function ContactForm() {
         <input
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder="(408) 366-9696"
+          placeholder="(123) 456-7890"
           type="tel"
           required
           style={inputStyle}

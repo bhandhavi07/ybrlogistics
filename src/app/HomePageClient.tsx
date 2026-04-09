@@ -8,14 +8,13 @@ import { siteImages } from "../data/siteImages";
 
 const trustCredentialItems: {
   label: string;
-  icon: "shield" | "map" | "package" | "route" | "document" | "payment";
+  icon: "shield" | "map" | "package" | "route" | "document";
 }[] = [
-  { label: "Licensed & Insured Service Provider", icon: "shield" },
-  { label: "California-Based Operations", icon: "map" },
-  { label: "Residential & Commercial Services", icon: "package" },
-  { label: "Freight & Last-Mile Delivery", icon: "route" },
-  { label: "Written Estimates", icon: "document" },
-  { label: "Clear Booking & Payment Process", icon: "payment" },
+  { label: "Licensed & insured service provider", icon: "shield" },
+  { label: "California-based operations", icon: "map" },
+  { label: "Residential and commercial support", icon: "package" },
+  { label: "Freight coordination and last-mile delivery", icon: "route" },
+  { label: "Written estimates and clear payment process", icon: "document" },
 ];
 
 const homeServicesSummary: { title: string; description: string; icon: ServiceIconId }[] = [
@@ -31,7 +30,7 @@ const homeServicesSummary: { title: string; description: string; icon: ServiceIc
   },
   {
     title: "Freight & Logistics",
-    description: "Support for freight transportation and logistics coordination.",
+    description: "Support for freight coordination and logistics planning for your job.",
     icon: "cargo",
   },
   {
@@ -48,7 +47,7 @@ const howItWorksSteps: { title: string; step: 1 | 2 | 3 | 4 }[] = [
   { title: "Pay remaining balance after completion", step: 4 },
 ];
 
-function TrustCredentialIcon({ id }: { id: (typeof trustCredentialItems)[number]["icon"] }) {
+function TrustCredentialIcon({ id }: { id: (typeof trustCredentialItems)[number]["icon"] | "payment" }) {
   const stroke = "currentColor";
   const common = { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none" as const, "aria-hidden": true as const };
   switch (id) {
@@ -148,7 +147,7 @@ export default function HomePageClient() {
           <div className="heroBleedInner">
             <div className="reveal heroBleedKicker">YBR Logistics</div>
             <h1 className="reveal revealDelay1 heroBleedTitle">
-              Reliable Moving, Freight, and Last-Mile Delivery Across California and Interstate Routes
+              Reliable Moving, Freight, and Last-Mile Delivery — California-Based Operations and Broader Service Support
             </h1>
             <p className="reveal revealDelay2 heroBleedLead">
               YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery
@@ -166,10 +165,10 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <section className="homeTrustFoundation section sectionLoose" aria-label="Trusted moving and logistics support">
+      <section className="homeTrustFoundation section sectionLoose" aria-label="Business credentials">
         <div className="container">
           <div className="homeTrustFoundationHeader">
-            <h2 className="homeTrustFoundationTitle">Trusted Moving and Logistics Support</h2>
+            <h2 className="homeTrustFoundationTitle">Business Credentials</h2>
             <p className="homeTrustFoundationServing">
               Serving residential and commercial customers with organized scheduling and professional handling.
             </p>

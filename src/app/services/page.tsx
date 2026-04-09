@@ -7,7 +7,7 @@ import { servicesCatalog } from "../../data/services";
 export const metadata: Metadata = {
   title: "Moving, Freight & Delivery Services",
   description:
-    "Residential moving, commercial moving, freight coordination, last-mile delivery, and storage support from YBR Logistics across California and interstate routes.",
+    "Residential moving, commercial moving, freight coordination, last-mile delivery, and storage support from YBR Logistics with California-based operations and broader service support.",
   alternates: {
     canonical: "/services",
   },
@@ -20,8 +20,8 @@ export default function ServicesPage() {
         <header className="servicesPageHead">
           <h1 className="servicesPageTitle">Services for Moving, Freight &amp; Last-Mile Delivery</h1>
           <p className="servicesPageSubtitle">
-            California-based operations with state and interstate coverage—structured quotes, clear communication, and
-            careful handling for residential, commercial, and freight jobs.
+            California-based operations with broader service support where available—structured quotes, clear communication,
+            and careful handling for residential, commercial, and freight jobs.
           </p>
         </header>
 

@@ -32,8 +32,8 @@ export default function AboutPage() {
           delivery.
         </p>
         <p style={{ margin: "0 0 24px", color: "var(--muted)", lineHeight: 1.75, fontSize: 16, maxWidth: 860 }}>
-          Our team supports state and interstate service needs, helping customers move household goods, business
-          equipment, and scheduled deliveries with confidence.
+          Our team supports California-based operations and broader service needs where available, helping customers move
+          household goods, business equipment, and scheduled deliveries with confidence.
         </p>
 
         <div className="card" style={{ padding: 0, overflow: "hidden", marginBottom: 22 }}>
