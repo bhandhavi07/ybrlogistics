@@ -168,8 +168,9 @@ export default function HomePageClient() {
               Reliable Moving, Freight, and Last-Mile Delivery — California-Based Operations and Broader Service Support
             </h1>
             <p className="reveal revealDelay2 heroBleedLead">
-              YBR Logistics provides residential moving, commercial moving, freight coordination, and last-mile delivery
-              with clear communication and professional handling.
+              YBR Logistics is a California-based moving and logistics service provider. We offer residential moving,
+              commercial moving, freight coordination, and last-mile delivery with clear communication and professional
+              handling.
             </p>
             <div className="reveal revealDelay2 heroBleedActions heroBleedActions--primary">
               <Link className="btn btn-primary btn-lg" href="/quote" prefetch={false}>
@@ -188,7 +189,7 @@ export default function HomePageClient() {
           <div className="homeTrustFoundationHeader">
             <h2 className="homeTrustFoundationTitle">Business Credentials</h2>
             <p className="homeTrustFoundationServing">
-              Serving residential and commercial customers with organized scheduling and professional handling.
+              Serving customers across California with broader service support based on scheduling and availability.
             </p>
           </div>
 
@@ -210,10 +211,15 @@ export default function HomePageClient() {
               <TrustCredentialIcon id="payment" />
             </div>
             <div className="homeTrustCalloutBody">
-              <p className="homeTrustCalloutText homeTrustCalloutText--solo">
-                Deposit required to confirm booking. Remaining balance due upon unloading or service completion. Any
-                additional charges are discussed and approved before being added.
-              </p>
+              <div className="homeTrustCalloutLines">
+                <p className="homeTrustCalloutLine">Deposit required to confirm booking.</p>
+                <p className="homeTrustCalloutLine">
+                  Remaining balance due upon unloading or service completion.
+                </p>
+                <p className="homeTrustCalloutLine">
+                  Any additional charges are discussed and approved before being added.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -232,6 +238,10 @@ export default function HomePageClient() {
               efficiently from booking to completion.
             </p>
             <p className="homeWhoWeAreTagline">Clear estimates. Professional handling. Reliable scheduling.</p>
+            <p className="homeWhoWeAreIdentityNote">
+              Based in Hayward, California — this website describes YBR Logistics at this location only. We are not
+              affiliated with other businesses that may use a similar name.
+            </p>
           </div>
         </div>
       </section>
@@ -273,7 +283,7 @@ export default function HomePageClient() {
         <div className="container">
           <h2 className="homeSectionTitle">How It Works</h2>
           <p className="homeSectionSubtitle homeHowItWorksSubtitle">
-            A straightforward process from quote request through completion.
+            A simple path from quote to completion.
           </p>
           <ol className="homeHowItWorksGrid">
             {howItWorksSteps.map((item) => (

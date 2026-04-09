@@ -885,6 +885,20 @@ a {
   font-size: 16px;
 }
 
+.homeTrustCalloutLines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.homeTrustCalloutLine {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.55;
+  color: var(--text);
+}
+
 .homeTrustFootnote {
   margin: 0;
   font-size: 13px;
@@ -2005,11 +2019,21 @@ a {
 }
 
 .homeWhoWeAreTagline {
-  margin: 0;
+  margin: 0 0 16px;
   font-size: 15px;
   font-weight: 900;
   letter-spacing: 0.02em;
   color: var(--text);
+}
+
+.homeWhoWeAreIdentityNote {
+  margin: 0;
+  padding-top: 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--muted);
+  max-width: 42rem;
 }
 
 /* Our work — Pexels stock imagery + representative disclaimer */
