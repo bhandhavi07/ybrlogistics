@@ -40,6 +40,24 @@ const homeServicesSummary: { title: string; description: string; icon: ServiceIc
   },
 ];
 
+const homeOurWorkCards: { image: string; alt: string; caption: string }[] = [
+  {
+    image: siteImages.homeOurWork.truck,
+    alt: "Commercial truck on the road representing professional moving and logistics support",
+    caption: "Professional moving and logistics support",
+  },
+  {
+    image: siteImages.homeOurWork.moving,
+    alt: "Stacked moving boxes representing residential and commercial moving services",
+    caption: "Residential and commercial moving services",
+  },
+  {
+    image: siteImages.homeOurWork.logistics,
+    alt: "Enclosed trailers at a yard representing organized handling and delivery coordination",
+    caption: "Organized handling and delivery coordination",
+  },
+];
+
 const howItWorksSteps: { title: string; step: 1 | 2 | 3 | 4 }[] = [
   { title: "Request a quote", step: 1 },
   { title: "Confirm booking with a deposit", step: 2 },
@@ -273,21 +291,29 @@ export default function HomePageClient() {
       <section className="section sectionLoose homeOurWorkSection" aria-label="Our work">
         <div className="container">
           <h2 className="homeSectionTitle">Our Work</h2>
-          <p className="homeSectionSubtitle">Real jobs. Real service. Real results.</p>
-          <p className="homeOurWorkBlurb">
-            We handle residential, commercial, and logistics jobs with organized scheduling and professional handling.
+          <p className="homeSectionSubtitle">
+            Reliable moving and logistics services for residential and commercial needs.
           </p>
           <div className="homeOurWorkGrid">
-            <div className="homeOurWorkPlaceholder card">
-              <span className="homeOurWorkPlaceholderLabel">Truck photo placeholder</span>
-            </div>
-            <div className="homeOurWorkPlaceholder card">
-              <span className="homeOurWorkPlaceholderLabel">Moving job photo placeholder</span>
-            </div>
-            <div className="homeOurWorkPlaceholder card">
-              <span className="homeOurWorkPlaceholderLabel">Equipment photo placeholder</span>
-            </div>
+            {homeOurWorkCards.map((card) => (
+              <figure key={card.caption} className="homeOurWorkCard card">
+                <div className="homeOurWorkImageWrap">
+                  <Image
+                    src={card.image}
+                    alt={card.alt}
+                    fill
+                    sizes="(max-width: 800px) 100vw, 33vw"
+                    className="homeOurWorkImg mediaCoverBoost"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <figcaption className="homeOurWorkCaption">{card.caption}</figcaption>
+              </figure>
+            ))}
           </div>
+          <p className="homeOurWorkDisclaimer">
+            Images shown are representative of the type of services we provide.
+          </p>
         </div>
       </section>
 

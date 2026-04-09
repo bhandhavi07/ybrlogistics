@@ -18,6 +18,8 @@ const truckMotionBlur = 11262203; /* Photo of a Truck on the Road */
 const truckCurvedRoad = 13667595; /* Truck on the Road */
 const highwayCloudy = 13682891; /* Scenic View of the Highway Under Cloudy Sky */
 const tankerMountainRoad = 28226737; /* Tanker truck on mountain road (Pexels) */
+/** Cardboard boxes — packing / moving scene (Pexels, royalty-free) */
+const movingBoxesStacked = 4246266;
 
 export const siteImages = {
   heroBanner: px(truckWhiteRoad, 1920),
@@ -46,6 +48,16 @@ export const siteImages = {
   homeOnTheRoad: {
     fleet: px(semiVolvoRoad, 1200),
     yard: px(trailersEnclosed, 1200),
+  },
+
+  /**
+   * Homepage “Our Work” — Pexels stock only; on-page disclaimer states imagery is representative.
+   * Truck: highway rig | Boxes: packing | Yard: enclosed trailers (logistics coordination).
+   */
+  homeOurWork: {
+    truck: px(truckCurvedRoad, 1200),
+    moving: px(movingBoxesStacked, 1200),
+    logistics: px(trailersEnclosed, 1200),
   },
 
   /**
