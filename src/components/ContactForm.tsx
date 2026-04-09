@@ -11,7 +11,6 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
 
@@ -32,7 +31,6 @@ export default function ContactForm() {
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
     const trimmedPhone = phone.trim();
-    const trimmedSubject = subject.trim();
     const trimmedMessage = message.trim();
 
     if (!trimmedName) return setError("Please enter your full name.");
@@ -43,7 +41,6 @@ export default function ContactForm() {
       return setError("Please enter a valid phone number.");
     }
 
-    if (!trimmedSubject) return setError("Please enter a subject.");
     if (!trimmedMessage || trimmedMessage.length < 10) {
       return setError("Please enter a message (at least 10 characters).");
     }
@@ -52,7 +49,6 @@ export default function ContactForm() {
       name: trimmedName,
       email: trimmedEmail,
       phone: trimmedPhone,
-      subject: trimmedSubject,
       message: trimmedMessage,
     };
 
@@ -75,7 +71,6 @@ export default function ContactForm() {
       setName("");
       setEmail("");
       setPhone("");
-      setSubject("");
       setMessage("");
     } catch {
       setError("Network error. Please try again in a moment.");
@@ -135,17 +130,6 @@ export default function ContactForm() {
           required
           style={inputStyle}
           autoComplete="tel"
-        />
-      </div>
-
-      <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Subject</label>
-        <input
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          placeholder="What is this regarding?"
-          required
-          style={inputStyle}
         />
       </div>
 

@@ -5,7 +5,6 @@ type ContactPayload = {
   name: string;
   email: string;
   phone: string;
-  subject: string;
   message: string;
 };
 
@@ -63,7 +62,6 @@ export async function POST(req: Request) {
   const name = (payload?.name || "").trim();
   const email = (payload?.email || "").trim();
   const phone = (payload?.phone || "").toString().trim();
-  const subject = (payload?.subject || "").trim();
   const message = (payload?.message || "").trim();
 
   if (!name || name.length < 2 || name.length > 120) {
@@ -85,10 +83,6 @@ export async function POST(req: Request) {
   const digits = phone.replace(/\D/g, "");
   if (!digits || digits.length < 7 || digits.length > 15) {
     return NextResponse.json({ ok: false, error: "Please provide a valid phone number." }, { status: 400 });
-  }
-
-  if (!subject || subject.length < 2 || subject.length > 200) {
-    return NextResponse.json({ ok: false, error: "Please provide a subject." }, { status: 400 });
   }
 
   if (!message || message.length < 10) {
@@ -153,13 +147,12 @@ export async function POST(req: Request) {
       })();
 
   const from = `${SMTP_FROM_NAME} <${CONTACT_FROM}>`;
-  const emailSubject = `Contact inquiry: ${subject} — ${name}`;
+  const emailSubject = `Contact inquiry — ${name}`;
 
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
     `Phone: ${phone}`,
-    `Subject: ${subject}`,
     "",
     "Message:",
     message,
@@ -171,7 +164,6 @@ export async function POST(req: Request) {
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-      <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
       <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
       <p style="white-space: pre-wrap; margin: 0;">${escapeHtml(message)}</p>
     </div>

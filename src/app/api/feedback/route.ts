@@ -4,9 +4,10 @@ import { NextResponse } from "next/server";
 type FeedbackPayload = {
   name: string;
   email: string;
-  serviceType: string;
-  serviceDate: string;
-  rating: number;
+  overallRating: number;
+  staffRating: number;
+  politenessRating: number;
+  timingsRating: number;
   message?: string;
 };
 
@@ -67,8 +68,6 @@ export async function POST(req: Request) {
 
   const name = (payload?.name || "").trim();
   const email = (payload?.email || "").trim();
-  const serviceType = (payload?.serviceType || "").trim();
-  const serviceDate = (payload?.serviceDate || "").trim();
   const message = (payload?.message || "").trim();
 
   if (!name || name.length < 2 || name.length > 120) {
@@ -79,23 +78,27 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  if (!serviceType || serviceType.length > 200) {
-    return NextResponse.json({ ok: false, error: "Please select or enter a service type." }, { status: 400 });
+  if (!isRating(payload?.overallRating)) {
+    return NextResponse.json({ ok: false, error: "Please select a valid overall rating (1–5)." }, { status: 400 });
   }
 
-  if (!serviceDate || serviceDate.length > 40) {
-    return NextResponse.json({ ok: false, error: "Please provide the service date." }, { status: 400 });
+  if (!isRating(payload?.staffRating)) {
+    return NextResponse.json({ ok: false, error: "Please select a valid staff rating (1–5)." }, { status: 400 });
   }
 
-  if (!isRating(payload?.rating)) {
-    return NextResponse.json({ ok: false, error: "Please select a rating from 1 to 5." }, { status: 400 });
+  if (!isRating(payload?.politenessRating)) {
+    return NextResponse.json({ ok: false, error: "Please select a valid politeness rating (1–5)." }, { status: 400 });
+  }
+
+  if (!isRating(payload?.timingsRating)) {
+    return NextResponse.json({ ok: false, error: "Please select a valid timing rating (1–5)." }, { status: 400 });
   }
 
   if (message.length > 8000) {
     return NextResponse.json({ ok: false, error: "Message is too long." }, { status: 400 });
   }
 
-  const { rating } = payload;
+  const { overallRating, staffRating, politenessRating, timingsRating } = payload;
 
   const SMTP_HOST = env("SMTP_HOST");
   const SMTP_PORT = env("SMTP_PORT");
@@ -151,14 +154,15 @@ export async function POST(req: Request) {
       })();
 
   const from = `${SMTP_FROM_NAME} <${CONTACT_FROM}>`;
-  const subject = `Customer feedback from ${name} — ${rating}/5`;
+  const subject = `Customer feedback from ${name} — overall ${overallRating}/5`;
 
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
-    `Service type: ${serviceType}`,
-    `Service date: ${serviceDate}`,
-    `Rating: ${rating} / 5`,
+    `Overall rating: ${overallRating} / 5`,
+    `Staff rating: ${staffRating} / 5`,
+    `Politeness: ${politenessRating} / 5`,
+    `Timing: ${timingsRating} / 5`,
     "",
     "Message:",
     message || "(none)",
@@ -169,9 +173,10 @@ export async function POST(req: Request) {
       <h2 style="margin: 0 0 12px;">${escapeHtml(subject)}</h2>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Service type:</strong> ${escapeHtml(serviceType)}</p>
-      <p><strong>Service date:</strong> ${escapeHtml(serviceDate)}</p>
-      <p><strong>Rating:</strong> ${rating} / 5</p>
+      <p><strong>Overall rating:</strong> ${overallRating} / 5</p>
+      <p><strong>Staff rating:</strong> ${staffRating} / 5</p>
+      <p><strong>Politeness:</strong> ${politenessRating} / 5</p>
+      <p><strong>Timing:</strong> ${timingsRating} / 5</p>
       <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
       <p style="white-space: pre-wrap; margin: 0;"><strong>Message:</strong><br/>${escapeHtml(message || "(none)")}</p>
     </div>
