@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { CSSProperties, FormEvent } from "react";
 
 const SERVICE_OPTIONS = [
@@ -27,6 +27,7 @@ export default function QuoteForm() {
   const [preferredDate, setPreferredDate] = useState("");
   const [additionalDetails, setAdditionalDetails] = useState("");
   const [website, setWebsite] = useState("");
+  const preferredDateInputRef = useRef<HTMLInputElement>(null);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -204,8 +205,14 @@ export default function QuoteForm() {
       <div style={{ display: "grid", gap: 6 }}>
         <label style={{ fontWeight: 800 }}>Preferred Date</label>
         <input
+          ref={preferredDateInputRef}
           value={preferredDate}
-          onChange={(e) => setPreferredDate(e.target.value)}
+          onChange={(e) => {
+            const next = e.target.value;
+            setPreferredDate(next);
+            // Native date pickers (especially Safari) often stay open after selection; blur dismisses the popover.
+            window.setTimeout(() => preferredDateInputRef.current?.blur(), 0);
+          }}
           type="date"
           required
           style={inputStyle}

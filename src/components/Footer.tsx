@@ -7,6 +7,7 @@ const footerExplore = [
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
   { href: "/quote", label: "Get a Quote" },
+  { href: "/pay", label: "Pay deposit" },
   { href: "/feedback", label: "Leave Feedback" },
 ];
 

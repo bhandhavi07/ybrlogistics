@@ -43,17 +43,17 @@ const homeServicesSummary: { title: string; description: string; icon: ServiceIc
 const homeOurWorkCards: { image: string; alt: string; caption: string }[] = [
   {
     image: siteImages.homeOurWork.truck,
-    alt: "Commercial truck on the road representing professional moving and logistics support",
+    alt: "Freight trucks on the highway representing professional moving and logistics support",
     caption: "Professional moving and logistics support",
   },
   {
     image: siteImages.homeOurWork.moving,
-    alt: "Stacked moving boxes representing residential and commercial moving services",
+    alt: "Movers carrying boxes during a residential relocation",
     caption: "Residential and commercial moving services",
   },
   {
     image: siteImages.homeOurWork.logistics,
-    alt: "Enclosed trailers at a yard representing organized handling and delivery coordination",
+    alt: "Heavy truck on a mountain road representing organized handling and delivery coordination",
     caption: "Organized handling and delivery coordination",
   },
 ];
@@ -231,11 +231,14 @@ export default function HomePageClient() {
             <h2 className="homeSectionTitle">Who We Are</h2>
             <p className="homeWhoWeAreText">
               YBR Logistics is a California-based moving and logistics service provider supporting residential moves,
-              commercial relocations, freight coordination, and last-mile delivery.
+              commercial relocations, freight coordination, and delivery support.
             </p>
             <p className="homeWhoWeAreText">
-              We focus on clear communication, reliable scheduling, and professional handling to ensure every job is managed
+              We focus on reliable scheduling, clear communication, and professional handling so every job is managed
               efficiently from booking to completion.
+            </p>
+            <p className="homeWhoWeAreSupporting">
+              California-based moving and logistics support with a focus on reliable scheduling and clear communication.
             </p>
             <p className="homeWhoWeAreTagline">Clear estimates. Professional handling. Reliable scheduling.</p>
             <p className="homeWhoWeAreIdentityNote">
@@ -243,6 +246,9 @@ export default function HomePageClient() {
               affiliated with other businesses that may use a similar name.
             </p>
           </div>
+          <p className="homeWhoWeAreHumanLine">
+            We focus on making every job simple, organized, and stress-free for our customers.
+          </p>
         </div>
       </section>
 

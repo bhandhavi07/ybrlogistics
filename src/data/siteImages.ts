@@ -1,14 +1,14 @@
 /**
  * Logistics stock imagery (Pexels). Each numeric ID is checked against the Pexels photo title.
- * This file maps **distinct scenes** per section so the site does not reuse the same shot everywhere.
+ * Homepage “Our Work” and /services cards use **disjoint** scenes so the same shot is not repeated across those areas.
  */
 function px(id: number, width: number = 1000) {
   return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
 }
 
-/* Verified titles (Pexels): vehicle / highway / fleet / trailers only */
-const truckWhiteRoad = 6940962; /* White Truck on Road */
-const semiVolvoRoad = 2199293; /* White Volvo Semi-truck on Side of Road */
+/* Verified titles (Pexels): vehicles / highway / fleet / moving — use for comments only */
+const truckWhiteRoad = 6940962; /* White Truck on Road — hero only */
+const semiVolvoRoad = 2199293; /* White Volvo Semi-truck */
 const freightTruckColor = 172074; /* Blue and Red Freight Truck on Road */
 const trailersEnclosed = 1267325; /* Three White Enclosed Trailers */
 const truckSunset = 27855399; /* Truck on road, sun setting */
@@ -17,9 +17,11 @@ const freewayTraffic = 210115; /* Vehicle Driving on Freeway */
 const truckMotionBlur = 11262203; /* Photo of a Truck on the Road */
 const truckCurvedRoad = 13667595; /* Truck on the Road */
 const highwayCloudy = 13682891; /* Scenic View of the Highway Under Cloudy Sky */
-const tankerMountainRoad = 28226737; /* Tanker truck on mountain road (Pexels) */
-/** Cardboard boxes — packing / moving scene (Pexels, royalty-free) */
-const movingBoxesStacked = 4246266;
+const tankerMountainRoad = 28226737; /* Tanker truck on mountain road */
+/** Red semi-trucks on desert highway — distinct from hero white truck */
+const redTrucksHighway = 11087830;
+/** Movers carrying boxes indoors — residential moving, distinct from “Our Work” truck/yard shots */
+const moversIndoorBoxes = 7464232;
 
 export const siteImages = {
   heroBanner: px(truckWhiteRoad, 1920),
@@ -37,40 +39,36 @@ export const siteImages = {
 
   aboutGallery: {
     intermodal: px(freewayTraffic, 900),
-    /** Parked-yard / staging — not the same three-trailer shot as Home “Store & distribute” */
     warehouse: px(trucksParkedYard, 900),
     linehaul: px(highwayCloudy, 900),
   },
 
   contactAside: px(semiVolvoRoad, 1000),
 
-  /** Homepage “On the road & on the job” — distinct scenes from the hero banner */
   homeOnTheRoad: {
     fleet: px(semiVolvoRoad, 1200),
     yard: px(trailersEnclosed, 1200),
   },
 
   /**
-   * Homepage “Our Work” — Pexels stock only; on-page disclaimer states imagery is representative.
-   * Truck: highway rig | Boxes: packing | Yard: enclosed trailers (logistics coordination).
+   * Homepage “Our Work” — scenes **not** reused on /services cards (see services.*).
    */
   homeOurWork: {
-    truck: px(truckCurvedRoad, 1200),
-    moving: px(movingBoxesStacked, 1200),
-    logistics: px(trailersEnclosed, 1200),
+    truck: px(redTrucksHighway, 1200),
+    moving: px(moversIndoorBoxes, 1200),
+    logistics: px(tankerMountainRoad, 1200),
   },
 
   /**
-   * Services grid: each URL is unique (no repeats on /services).
-   * Scenes differ from home focus cards (freight color / trailers / sunset) where possible.
+   * Services grid — each URL unique on /services and **not** the same file as homeOurWork.*.
    */
   services: {
-    localFreight: px(truckCurvedRoad),
+    localFreight: px(truckMotionBlur),
     dcc: px(semiVolvoRoad),
     warehouse: px(trailersEnclosed),
     lastMile: px(trucksParkedYard),
-    specialized: px(tankerMountainRoad),
-    moving: px(truckWhiteRoad),
+    specialized: px(freightTruckColor),
+    moving: px(truckCurvedRoad),
     sameDay: px(freewayTraffic),
     linehaul: px(highwayCloudy),
   },
