@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ContactForm from "../../components/ContactForm";
+import ContactFaq from "../../components/ContactFaq";
 import { siteImages } from "../../data/siteImages";
 
 export const metadata: Metadata = {
@@ -47,8 +48,7 @@ export default function ContactPage() {
               <div style={{ fontWeight: 950, fontSize: 18 }}>YBR Logistics</div>
               <div style={{ color: "var(--muted)", marginTop: 10, fontWeight: 650, lineHeight: 1.7 }}>
                 <div>
-                  <span style={{ fontWeight: 900, color: "var(--text)" }}>Address:</span> 24240 Nora Cir, Hayward, CA
-                  94545
+                  <span style={{ fontWeight: 900, color: "var(--text)" }}>Address:</span> 24240 Nora Cir, Hayward, CA 94545
                 </div>
                 <div>
                   <span style={{ fontWeight: 900, color: "var(--text)" }}>Phone:</span>{" "}
@@ -79,6 +79,10 @@ export default function ContactPage() {
             </p>
             <ContactForm />
           </div>
+        </div>
+
+        <div className="contactFaqSection">
+          <ContactFaq />
         </div>
       </div>
     </section>
