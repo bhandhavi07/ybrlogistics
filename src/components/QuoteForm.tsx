@@ -113,7 +113,7 @@ export default function QuoteForm() {
     <form id="quote-form" onSubmit={onSubmit} style={{ display: "grid", gap: 12, position: "relative" }}>
       <div className="contactLeadFormRow">
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Full name</label>
+          <label style={{ fontWeight: 800 }}>Full Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -124,7 +124,7 @@ export default function QuoteForm() {
           />
         </div>
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Phone number</label>
+          <label style={{ fontWeight: 800 }}>Phone</label>
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -138,7 +138,7 @@ export default function QuoteForm() {
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Email address</label>
+        <label style={{ fontWeight: 800 }}>Email</label>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -151,7 +151,7 @@ export default function QuoteForm() {
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Pickup address</label>
+        <label style={{ fontWeight: 800 }}>Pickup Address</label>
         <input
           value={pickupLocation}
           onChange={(e) => setPickupLocation(e.target.value)}
@@ -162,7 +162,7 @@ export default function QuoteForm() {
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Delivery address</label>
+        <label style={{ fontWeight: 800 }}>Delivery Address</label>
         <input
           value={deliveryLocation}
           onChange={(e) => setDeliveryLocation(e.target.value)}
@@ -174,7 +174,7 @@ export default function QuoteForm() {
 
       <div className="contactLeadFormRow">
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Service type</label>
+          <label style={{ fontWeight: 800 }}>Service Type</label>
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
@@ -190,7 +190,7 @@ export default function QuoteForm() {
           </select>
         </div>
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Estimated move or shipment size</label>
+          <label style={{ fontWeight: 800 }}>Estimated Size</label>
           <input
             value={estimatedSize}
             onChange={(e) => setEstimatedSize(e.target.value)}
@@ -202,7 +202,7 @@ export default function QuoteForm() {
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Preferred date</label>
+        <label style={{ fontWeight: 800 }}>Preferred Date</label>
         <input
           value={preferredDate}
           onChange={(e) => setPreferredDate(e.target.value)}
@@ -213,7 +213,7 @@ export default function QuoteForm() {
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Additional details</label>
+        <label style={{ fontWeight: 800 }}>Additional Details</label>
         <textarea
           value={additionalDetails}
           onChange={(e) => setAdditionalDetails(e.target.value)}

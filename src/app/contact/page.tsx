@@ -20,14 +20,10 @@ export default function ContactPage() {
       <div className="container">
         <h1 style={{ margin: 0, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: 1.1 }}>Contact YBR Logistics</h1>
         <p style={{ margin: "12px 0 28px", color: "var(--muted)", lineHeight: 1.7, fontSize: 16, maxWidth: 720 }}>
-          Have a question about our services, availability, or scheduling? Send us a message and our team will get back to
-          you. For detailed pricing on a specific job, use{" "}
+          Have a question about our services or availability? Send us a message and we&apos;ll get back to you. For job
+          pricing, use{" "}
           <Link href="/quote" prefetch={false} style={{ fontWeight: 800, color: "var(--accent-red)" }}>
-            Request a Quote
-          </Link>
-          . Already a customer? You can also{" "}
-          <Link href="/feedback" prefetch={false} style={{ fontWeight: 800, color: "var(--accent-red)" }}>
-            leave feedback
+            Get a Quote
           </Link>
           .
         </p>
@@ -75,7 +71,7 @@ export default function ContactPage() {
           <div className="card" style={{ padding: 22 }}>
             <h2 style={{ margin: "0 0 6px", fontSize: 20, fontWeight: 900 }}>Send us a message</h2>
             <p style={{ margin: "0 0 16px", color: "var(--muted)", fontSize: 14, fontWeight: 650, lineHeight: 1.55 }}>
-              General questions only—no job details required.
+              General inquiries—use Get a Quote for detailed job estimates.
             </p>
             <ContactForm />
           </div>

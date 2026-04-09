@@ -923,7 +923,7 @@ a {
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
 }
 
-/* Visual trust placeholders (photos / DOT) */
+/* Visual trust section (legacy homepage photography) */
 .homeVisualTrustSection {
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
@@ -1979,17 +1979,71 @@ a {
   color: var(--text);
 }
 
-/* Our work — photo grid */
+/* Who we are */
+.homeWhoWeAreSection {
+  background: #fff;
+}
+
+.homeWhoWeAreCard {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 28px 26px 30px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-md);
+}
+
+.homeWhoWeAreText {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.homeWhoWeAreText:last-of-type {
+  margin-bottom: 18px;
+}
+
+.homeWhoWeAreTagline {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+/* Our work — placeholders (swap for real photos in HomePageClient / siteImages) */
+.homeOurWorkSection .container {
+  text-align: center;
+}
+
+.homeOurWorkSection .homeSectionTitle,
+.homeOurWorkSection .homeSectionSubtitle {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .homeOurWorkSection {
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   border-top: 1px solid var(--border);
+}
+
+.homeOurWorkBlurb {
+  margin: 8px auto 0;
+  max-width: 40rem;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 650;
+  color: var(--muted);
 }
 
 .homeOurWorkGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 12px;
+  margin-top: 20px;
 }
 
 @media (max-width: 800px) {
@@ -1998,41 +2052,29 @@ a {
   }
 }
 
-.homeOurWorkCard {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
-}
-
-.homeOurWorkImageWrap {
-  position: relative;
-  width: 100%;
+.homeOurWorkPlaceholder {
   min-height: 200px;
-  aspect-ratio: 16 / 10;
-  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: repeating-linear-gradient(
+    -12deg,
+    #f1f5f9,
+    #f1f5f9 12px,
+    #e8eef5 12px,
+    #e8eef5 24px
+  );
+  border: 1px dashed rgba(15, 23, 42, 0.12);
+  box-shadow: none;
 }
 
-.homeOurWorkImg {
-  transition: transform 0.45s ease;
-}
-
-.homeOurWorkCard:hover .homeOurWorkImg {
-  transform: scale(1.04);
-}
-
-.homeOurWorkCaption {
-  margin: 0;
-  padding: 14px 16px 16px;
-  font-size: 15px;
-  font-weight: 900;
-  color: var(--text);
-  line-height: 1.3;
+.homeOurWorkPlaceholderLabel {
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.45;
 }
 
 /* Final CTA */

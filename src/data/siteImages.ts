@@ -48,13 +48,6 @@ export const siteImages = {
     yard: px(trailersEnclosed, 1200),
   },
 
-  /** Homepage “Our work” — three distinct scenes (not the hero banner shot) */
-  homeOurWork: {
-    truck: px(semiVolvoRoad, 1200),
-    moving: px(truckMotionBlur, 1200),
-    equipment: px(trailersEnclosed, 1200),
-  },
-
   /**
    * Services grid: each URL is unique (no repeats on /services).
    * Scenes differ from home focus cards (freight color / trailers / sunset) where possible.

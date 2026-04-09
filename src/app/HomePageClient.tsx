@@ -26,17 +26,17 @@ const homeServicesSummary: { title: string; description: string; icon: ServiceIc
   },
   {
     title: "Commercial Moving",
-    description: "Office and business relocation designed to reduce downtime and keep operations running.",
+    description: "Office and business relocation designed to reduce downtime.",
     icon: "truckDedicated",
   },
   {
     title: "Freight & Logistics",
-    description: "Support for freight transportation and logistics coordination based on your job needs.",
+    description: "Support for freight transportation and logistics coordination.",
     icon: "cargo",
   },
   {
     title: "Last-Mile Delivery",
-    description: "Reliable final delivery with appointment coordination and professional service.",
+    description: "Reliable final delivery with appointment coordination.",
     icon: "van",
   },
 ];
@@ -44,7 +44,7 @@ const homeServicesSummary: { title: string; description: string; icon: ServiceIc
 const howItWorksSteps: { title: string; step: 1 | 2 | 3 | 4 }[] = [
   { title: "Request a quote", step: 1 },
   { title: "Confirm booking with a deposit", step: 2 },
-  { title: "We complete the move or delivery", step: 3 },
+  { title: "We complete the job", step: 3 },
   { title: "Pay remaining balance after completion", step: 4 },
 ];
 
@@ -202,6 +202,23 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      <section className="section sectionLoose homeWhoWeAreSection" aria-label="Who we are">
+        <div className="container">
+          <div className="homeWhoWeAreCard card">
+            <h2 className="homeSectionTitle">Who We Are</h2>
+            <p className="homeWhoWeAreText">
+              YBR Logistics is a California-based moving and logistics service provider supporting residential moves,
+              commercial relocations, freight coordination, and last-mile delivery.
+            </p>
+            <p className="homeWhoWeAreText">
+              We focus on clear communication, reliable scheduling, and professional handling to ensure every job is managed
+              efficiently from booking to completion.
+            </p>
+            <p className="homeWhoWeAreTagline">Clear estimates. Professional handling. Reliable scheduling.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="section sectionLoose homeServicesCompactSection" aria-label="Our services">
         <div className="container">
           <h2 className="homeSectionTitle">Our Services</h2>
@@ -257,49 +274,20 @@ export default function HomePageClient() {
       <section className="section sectionLoose homeOurWorkSection" aria-label="Our work">
         <div className="container">
           <h2 className="homeSectionTitle">Our Work</h2>
-          <p className="homeSectionSubtitle">
-            Fleet, moves, and yard operations—professional handling for every job.
+          <p className="homeSectionSubtitle">Real jobs. Real service. Real results.</p>
+          <p className="homeOurWorkBlurb">
+            We handle residential, commercial, and logistics jobs with organized scheduling and professional handling.
           </p>
           <div className="homeOurWorkGrid">
-            <figure className="homeOurWorkCard card">
-              <div className="homeOurWorkImageWrap">
-                <Image
-                  src={siteImages.homeOurWork.truck}
-                  alt="Commercial truck on the road for logistics and delivery"
-                  fill
-                  sizes="(max-width: 800px) 100vw, 33vw"
-                  className="homeOurWorkImg mediaCoverBoost"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <figcaption className="homeOurWorkCaption">On the road</figcaption>
-            </figure>
-            <figure className="homeOurWorkCard card">
-              <div className="homeOurWorkImageWrap">
-                <Image
-                  src={siteImages.homeOurWork.moving}
-                  alt="Truck in motion for moving and freight services"
-                  fill
-                  sizes="(max-width: 800px) 100vw, 33vw"
-                  className="homeOurWorkImg mediaCoverBoost"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <figcaption className="homeOurWorkCaption">Moving &amp; freight</figcaption>
-            </figure>
-            <figure className="homeOurWorkCard card">
-              <div className="homeOurWorkImageWrap">
-                <Image
-                  src={siteImages.homeOurWork.equipment}
-                  alt="Enclosed trailers and equipment at a logistics yard"
-                  fill
-                  sizes="(max-width: 800px) 100vw, 33vw"
-                  className="homeOurWorkImg mediaCoverBoost"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <figcaption className="homeOurWorkCaption">Equipment &amp; staging</figcaption>
-            </figure>
+            <div className="homeOurWorkPlaceholder card">
+              <span className="homeOurWorkPlaceholderLabel">Truck photo placeholder</span>
+            </div>
+            <div className="homeOurWorkPlaceholder card">
+              <span className="homeOurWorkPlaceholderLabel">Moving job photo placeholder</span>
+            </div>
+            <div className="homeOurWorkPlaceholder card">
+              <span className="homeOurWorkPlaceholderLabel">Equipment photo placeholder</span>
+            </div>
           </div>
         </div>
       </section>

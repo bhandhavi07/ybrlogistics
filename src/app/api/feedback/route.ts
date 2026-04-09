@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 
 type FeedbackPayload = {
   name: string;
-  overallRating: number;
-  staffRating: number;
-  politenessRating: number;
-  timingsRating: number;
+  email: string;
+  serviceType: string;
+  serviceDate: string;
+  rating: number;
   message?: string;
 };
 
@@ -52,6 +52,10 @@ function isRating(n: unknown): n is number {
   return typeof n === "number" && Number.isInteger(n) && n >= 1 && n <= 5;
 }
 
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export async function POST(req: Request) {
   let payload: FeedbackPayload;
 
@@ -62,33 +66,36 @@ export async function POST(req: Request) {
   }
 
   const name = (payload?.name || "").trim();
+  const email = (payload?.email || "").trim();
+  const serviceType = (payload?.serviceType || "").trim();
+  const serviceDate = (payload?.serviceDate || "").trim();
   const message = (payload?.message || "").trim();
 
   if (!name || name.length < 2 || name.length > 120) {
     return NextResponse.json({ ok: false, error: "Please provide your name." }, { status: 400 });
   }
 
-  if (!isRating(payload?.overallRating)) {
-    return NextResponse.json({ ok: false, error: "Please select a valid overall rating (1–5)." }, { status: 400 });
+  if (!email || !isValidEmail(email) || email.length > 254) {
+    return NextResponse.json({ ok: false, error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  if (!isRating(payload?.staffRating)) {
-    return NextResponse.json({ ok: false, error: "Please select a valid staff rating (1–5)." }, { status: 400 });
+  if (!serviceType || serviceType.length > 200) {
+    return NextResponse.json({ ok: false, error: "Please select or enter a service type." }, { status: 400 });
   }
 
-  if (!isRating(payload?.politenessRating)) {
-    return NextResponse.json({ ok: false, error: "Please select a valid politeness rating (1–5)." }, { status: 400 });
+  if (!serviceDate || serviceDate.length > 40) {
+    return NextResponse.json({ ok: false, error: "Please provide the service date." }, { status: 400 });
   }
 
-  if (!isRating(payload?.timingsRating)) {
-    return NextResponse.json({ ok: false, error: "Please select a valid timings rating (1–5)." }, { status: 400 });
+  if (!isRating(payload?.rating)) {
+    return NextResponse.json({ ok: false, error: "Please select a rating from 1 to 5." }, { status: 400 });
   }
 
   if (message.length > 8000) {
     return NextResponse.json({ ok: false, error: "Message is too long." }, { status: 400 });
   }
 
-  const { overallRating, staffRating, politenessRating, timingsRating } = payload;
+  const { rating } = payload;
 
   const SMTP_HOST = env("SMTP_HOST");
   const SMTP_PORT = env("SMTP_PORT");
@@ -144,14 +151,14 @@ export async function POST(req: Request) {
       })();
 
   const from = `${SMTP_FROM_NAME} <${CONTACT_FROM}>`;
-  const subject = `Customer feedback from ${name} — overall ${overallRating}/5`;
+  const subject = `Customer feedback from ${name} — ${rating}/5`;
 
   const text = [
     `Name: ${name}`,
-    `Overall rating: ${overallRating} / 5`,
-    `Staff rating: ${staffRating} / 5`,
-    `Politeness: ${politenessRating} / 5`,
-    `Timings: ${timingsRating} / 5`,
+    `Email: ${email}`,
+    `Service type: ${serviceType}`,
+    `Service date: ${serviceDate}`,
+    `Rating: ${rating} / 5`,
     "",
     "Message:",
     message || "(none)",
@@ -161,10 +168,10 @@ export async function POST(req: Request) {
     <div style="font-family: Arial, sans-serif; line-height: 1.5;">
       <h2 style="margin: 0 0 12px;">${escapeHtml(subject)}</h2>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Overall rating:</strong> ${overallRating} / 5</p>
-      <p><strong>Staff rating:</strong> ${staffRating} / 5</p>
-      <p><strong>Politeness:</strong> ${politenessRating} / 5</p>
-      <p><strong>Timings:</strong> ${timingsRating} / 5</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Service type:</strong> ${escapeHtml(serviceType)}</p>
+      <p><strong>Service date:</strong> ${escapeHtml(serviceDate)}</p>
+      <p><strong>Rating:</strong> ${rating} / 5</p>
       <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
       <p style="white-space: pre-wrap; margin: 0;"><strong>Message:</strong><br/>${escapeHtml(message || "(none)")}</p>
     </div>

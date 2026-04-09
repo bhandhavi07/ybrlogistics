@@ -101,7 +101,7 @@ export default function ContactForm() {
 
       <div className="contactLeadFormRow">
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Full name</label>
+          <label style={{ fontWeight: 800 }}>Full Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -112,29 +112,29 @@ export default function ContactForm() {
           />
         </div>
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontWeight: 800 }}>Phone number</label>
+          <label style={{ fontWeight: 800 }}>Email</label>
           <input
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="(408) 366-9696"
-            type="tel"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
             required
+            type="email"
             style={inputStyle}
-            autoComplete="tel"
+            autoComplete="email"
           />
         </div>
       </div>
 
       <div style={{ display: "grid", gap: 6 }}>
-        <label style={{ fontWeight: 800 }}>Email address</label>
+        <label style={{ fontWeight: 800 }}>Phone</label>
         <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="(408) 366-9696"
+          type="tel"
           required
-          type="email"
           style={inputStyle}
-          autoComplete="email"
+          autoComplete="tel"
         />
       </div>
 

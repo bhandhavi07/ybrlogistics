@@ -11,9 +11,9 @@ const footerExplore = [
 ];
 
 const footerLegal = [
-  { href: "/terms-and-conditions", label: "Terms & Conditions" },
-  { href: "/refund-policy", label: "Refund Policy" },
-  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms-and-conditions", label: "Terms" },
+  { href: "/privacy-policy", label: "Privacy" },
+  { href: "/refund-policy", label: "Refund" },
 ];
 
 export default function Footer() {
